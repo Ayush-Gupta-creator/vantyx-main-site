@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VANTYX Studio — We Build Brands That Command Attention</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --black:    #070707;
+  --dark:     #0e0a0a;
+  --brown:    #120d0b;
+  --redark:   #1a0808;
+  --red:      #8B0000;
+  --red2:     #A50000;
+  --red3:     #6B0000;
+  --white:    #F2EDE8;
+  --grey:     #857e79;
+  --border:   rgba(139,0,0,0.25);
+  --borderl:  rgba(139,0,0,0.12);
+}
+
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden;}
+
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:var(--black);}
+::-webkit-scrollbar-thumb{background:var(--red);border-radius:2px;}
+
+/* ─── CURSOR GLOW ─── */
+.cursor-glow{
+  position:fixed;width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(139,0,0,0.07) 0%,transparent 70%);
+  pointer-events:none;z-index:0;transform:translate(-50%,-50%);
+  transition:opacity 0.3s;
+}
+
+/* ─── NAVBAR ─── */
+nav{
+  position:fixed;top:16px;left:50%;transform:translateX(-50%);
+  width:calc(100% - 48px);max-width:1200px;
+  z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 32px;
+  background:rgba(7,7,7,0.75);
+  backdrop-filter:blur(20px);
+  border:1px solid var(--border);
+  border-radius:4px;
+  transition:all 0.4s;
+}
+nav.scrolled{background:rgba(7,7,7,0.95);border-color:rgba(139,0,0,0.4);}
+
+.nav-logo{
+  font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;
+  color:var(--white);letter-spacing:0.2em;text-decoration:none;
+  position:relative;
+}
+.nav-logo span{color:var(--red);}
+
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{
+  font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--grey);text-decoration:none;transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--white);}
+
+.nav-cta{
+  font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--white);background:var(--red);
+  padding:10px 22px;border-radius:50px;text-decoration:none;
+  transition:background 0.2s,transform 0.2s;border:none;cursor:pointer;
+}
+.nav-cta:hover{background:var(--red2);transform:translateY(-1px);}
+
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;}
+.hamburger span{width:22px;height:1px;background:var(--white);display:block;transition:0.3s;}
+
+/* ─── MOBILE MENU ─── */
+.mobile-menu{
+  display:none;position:fixed;inset:0;
+  background:rgba(7,7,7,0.98);z-index:999;
+  flex-direction:column;align-items:center;justify-content:center;gap:40px;
+}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{
+  font-family:'Playfair Display',serif;font-size:2.2rem;
+  color:var(--white);text-decoration:none;transition:color 0.2s;
+}
+.mobile-menu a:hover{color:var(--red);}
+.mobile-close{
+  position:absolute;top:28px;right:6vw;
+  font-size:1.4rem;color:var(--grey);cursor:pointer;
+  background:none;border:none;
+}
+
+/* ─── HERO ─── */
+#hero{
+  min-height:100vh;display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  padding:120px 6vw 80px;
+  position:relative;overflow:hidden;
+  background:var(--black);
+}
+
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 60% at 70% 50%,rgba(139,0,0,0.08) 0%,transparent 70%),
+    radial-gradient(ellipse 40% 40% at 20% 80%,rgba(139,0,0,0.04) 0%,transparent 60%);
+  pointer-events:none;
+}
+
+.hero-lines{
+  position:absolute;inset:0;
+  background:repeating-linear-gradient(
+    0deg,transparent,transparent 80px,rgba(139,0,0,0.03) 80px,rgba(139,0,0,0.03) 81px
+  );pointer-events:none;
+}
+
+.hero-left{position:relative;z-index:1;}
+
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:12px;
+  font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--red);margin-bottom:32px;
+  opacity:0;animation:slideRight 0.8s 0.3s forwards;
+}
+.hero-eyebrow::before{
+  content:'';width:32px;height:1px;background:var(--red);flex-shrink:0;
+}
+
+.hero-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.8rem,5vw,5.2rem);
+  font-weight:900;line-height:1.08;
+  color:var(--white);margin-bottom:24px;
+  opacity:0;animation:slideRight 0.9s 0.5s forwards;
+}
+.hero-title em{color:var(--red);font-style:italic;}
+
+.hero-sub{
+  font-size:1rem;color:var(--grey);max-width:460px;
+  font-weight:300;line-height:1.8;margin-bottom:48px;
+  opacity:0;animation:slideRight 0.9s 0.7s forwards;
+}
+
+.hero-btns{
+  display:flex;gap:16px;flex-wrap:wrap;
+  opacity:0;animation:slideRight 0.9s 0.9s forwards;
+}
+
+.btn-red{
+  background:var(--red);color:var(--white);
+  padding:15px 36px;border-radius:50px;
+  font-size:0.8rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  text-decoration:none;transition:background 0.2s,transform 0.2s;
+  border:none;cursor:pointer;
+}
+.btn-red:hover{background:var(--red2);transform:translateY(-2px);}
+
+.btn-ghost{
+  border:1px solid rgba(242,237,232,0.2);color:var(--white);
+  padding:15px 36px;border-radius:50px;
+  font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;
+  text-decoration:none;transition:border-color 0.2s,background 0.2s;
+}
+.btn-ghost:hover{border-color:var(--red);background:rgba(139,0,0,0.08);}
+
+.hero-stats{
+  display:flex;gap:48px;margin-top:64px;
+  opacity:0;animation:slideRight 0.9s 1.1s forwards;
+}
+.stat-n{
+  font-family:'Playfair Display',serif;
+  font-size:2.6rem;font-weight:700;color:var(--red);display:block;line-height:1;
+}
+.stat-l{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--grey);margin-top:4px;}
+
+/* HERO RIGHT */
+.hero-right{
+  display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:1;
+  opacity:0;animation:fadeIn 1.2s 0.6s forwards;
+}
+
+.hero-mockup{
+  width:100%;max-width:460px;
+  background:linear-gradient(145deg,var(--dark),var(--redark));
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:48px 40px;
+  position:relative;
+  overflow:hidden;
+}
+.hero-mockup::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:200px;height:200px;border-radius:50%;
+  background:radial-gradient(circle,rgba(139,0,0,0.2),transparent 70%);
+}
+.mockup-tag{
+  font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--red);margin-bottom:24px;
+  display:flex;align-items:center;gap:8px;
+}
+.mockup-tag::before{content:'';width:20px;height:1px;background:var(--red);}
+
+.mockup-logo{
+  font-family:'Playfair Display',serif;
+  font-size:3.6rem;font-weight:900;
+  color:var(--white);letter-spacing:0.15em;
+  line-height:1;margin-bottom:16px;
+}
+.mockup-logo span{color:var(--red);}
+
+.mockup-tagline{
+  font-size:0.82rem;color:var(--grey);
+  font-style:italic;font-family:'Playfair Display',serif;
+  margin-bottom:32px;line-height:1.6;
+}
+
+.mockup-services{display:flex;flex-wrap:wrap;gap:8px;}
+.mockup-pill{
+  font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;
+  border:1px solid var(--border);color:var(--grey);
+  padding:6px 12px;border-radius:50px;
+  transition:border-color 0.2s,color 0.2s;
+}
+.mockup-pill:hover{border-color:var(--red);color:var(--white);}
+
+.mockup-divider{width:100%;height:1px;background:var(--border);margin:28px 0;}
+
+.mockup-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+}
+.mockup-since{font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--grey);}
+.mockup-dot{
+  width:8px;height:8px;border-radius:50%;background:var(--red);
+  box-shadow:0 0 12px var(--red);
+  animation:pulse 2s infinite;
+}
+
+/* ─── SECTION BASE ─── */
+section{padding:100px 6vw;position:relative;}
+
+.s-eyebrow{
+  font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--red);margin-bottom:14px;
+  display:flex;align-items:center;gap:12px;
+}
+.s-eyebrow::before{content:'';width:24px;height:1px;background:var(--red);}
+
+.s-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,3.5vw,3rem);
+  font-weight:700;color:var(--white);
+  line-height:1.15;margin-bottom:16px;
+}
+.s-title em{color:var(--red);font-style:italic;}
+
+.s-sub{font-size:0.92rem;color:var(--grey);font-weight:300;max-width:500px;line-height:1.8;}
+
+.red-rule{width:40px;height:2px;background:var(--red);margin:24px 0;border-radius:1px;}
+
+/* ─── SERVICES ─── */
+#services{background:var(--dark);}
+
+.services-top{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  flex-wrap:wrap;gap:24px;margin-bottom:64px;
+}
+
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+}
+
+.svc-card{
+  background:var(--dark);padding:40px 32px;
+  transition:background 0.3s;cursor:default;
+  position:relative;overflow:hidden;
+}
+.svc-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--red);transform:scaleX(0);transform-origin:left;
+  transition:transform 0.4s;
+}
+.svc-card:hover{background:var(--redark);}
+.svc-card:hover::after{transform:scaleX(1);}
+
+.svc-num{
+  font-family:'Playfair Display',serif;
+  font-size:3.5rem;font-weight:900;
+  color:rgba(139,0,0,0.12);
+  position:absolute;top:16px;right:20px;
+  line-height:1;pointer-events:none;
+  transition:color 0.3s;
+}
+.svc-card:hover .svc-num{color:rgba(139,0,0,0.2);}
+
+.svc-icon{font-size:1.8rem;margin-bottom:20px;display:block;}
+.svc-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem;font-weight:700;
+  color:var(--white);margin-bottom:10px;
+}
+.svc-desc{font-size:0.85rem;color:var(--grey);line-height:1.7;}
+
+/* ─── NICHES ─── */
+#niches{background:var(--brown);}
+
+.niches-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+
+.niches-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:12px;
+}
+
+.niche-item{
+  display:flex;align-items:center;gap:14px;
+  padding:16px 18px;
+  border:1px solid var(--borderl);
+  transition:border-color 0.3s,background 0.3s;cursor:default;
+  border-radius:2px;
+}
+.niche-item:hover{border-color:var(--red);background:rgba(139,0,0,0.05);}
+.niche-icon{font-size:1.3rem;flex-shrink:0;}
+.niche-name{font-size:0.8rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--grey);}
+
+/* ─── PLANS ─── */
+#plans{background:var(--black);}
+
+.plans-header{margin-bottom:64px;}
+
+.plans-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.plan-card{
+  background:var(--dark);
+  border:1px solid var(--borderl);
+  padding:36px 28px;
+  position:relative;
+  transition:border-color 0.3s,transform 0.3s;
+  border-radius:2px;
+}
+.plan-card:hover{border-color:var(--red);transform:translateY(-4px);}
+.plan-card.hot{
+  border-color:var(--red);
+  background:linear-gradient(160deg,var(--redark),var(--dark));
+}
+
+.plan-badge{
+  position:absolute;top:-1px;left:28px;
+  background:var(--red);color:var(--white);
+  font-size:0.6rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;
+  padding:4px 12px;border-radius:0 0 4px 4px;
+}
+
+.plan-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.4rem;font-weight:700;color:var(--white);margin-bottom:4px;
+}
+.plan-for{font-size:0.76rem;color:var(--grey);margin-bottom:20px;font-style:italic;}
+
+.plan-price{
+  font-family:'Playfair Display',serif;
+  font-size:2.6rem;font-weight:900;color:var(--red);
+  line-height:1;margin-bottom:4px;
+}
+.plan-price sub{font-size:1rem;font-family:'Inter',sans-serif;color:var(--grey);}
+
+.plan-sep{width:100%;height:1px;background:var(--borderl);margin:20px 0;}
+
+.plan-features{list-style:none;margin-bottom:28px;}
+.plan-features li{
+  font-size:0.83rem;color:var(--grey);padding:5px 0 5px 18px;
+  position:relative;line-height:1.5;
+}
+.plan-features li::before{
+  content:'›';position:absolute;left:0;color:var(--red);font-size:1rem;
+}
+
+.plan-btn{
+  display:block;text-align:center;
+  padding:12px 20px;border-radius:50px;
+  font-size:0.76rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  text-decoration:none;
+  border:1px solid var(--red);color:var(--red);
+  transition:background 0.2s,color 0.2s;
+}
+.plan-btn:hover,.plan-card.hot .plan-btn{background:var(--red);color:var(--white);}
+
+/* ─── PORTFOLIO ─── */
+#portfolio{background:var(--brown);}
+
+.portfolio-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:20px;margin-top:56px;
+}
+
+.port-card{
+  background:var(--dark);border:1px solid var(--borderl);
+  overflow:hidden;border-radius:2px;
+  transition:border-color 0.3s,transform 0.3s;
+}
+.port-card:hover{border-color:var(--red);transform:translateY(-4px);}
+
+.port-thumb{
+  height:190px;background:var(--redark);
+  display:flex;align-items:center;justify-content:center;
+  font-size:2.8rem;border-bottom:1px solid var(--borderl);
+  overflow:hidden;position:relative;
+}
+.port-thumb iframe{
+  width:100%;height:300px;border:none;
+  transform:scale(0.65) translateY(-28%);
+  transform-origin:top center;pointer-events:none;
+}
+.port-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 50%,rgba(7,7,7,0.6));
+}
+
+.port-info{padding:22px 24px;}
+.port-tag{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:6px;}
+.port-title{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--white);margin-bottom:6px;}
+.port-desc{font-size:0.82rem;color:var(--grey);line-height:1.6;}
+.port-link{
+  display:inline-block;margin-top:14px;
+  font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--red);text-decoration:none;
+  border-bottom:1px solid rgba(139,0,0,0.3);padding-bottom:1px;
+  transition:border-color 0.2s;
+}
+.port-link:hover{border-color:var(--red);}
+
+/* ─── TEAM ─── */
+#team{background:var(--black);}
+
+.team-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:20px;margin-top:56px;
+}
+
+.team-card{
+  background:var(--dark);border:1px solid var(--borderl);
+  padding:32px 24px;text-align:center;border-radius:2px;
+  transition:border-color 0.3s,transform 0.3s;
+}
+.team-card:hover{border-color:var(--red);transform:translateY(-4px);}
+
+.team-av{
+  width:64px;height:64px;border-radius:50%;
+  border:1px solid var(--red);
+  margin:0 auto 18px;
+  background:var(--redark);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;font-weight:700;color:var(--red);
+}
+.team-name{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--white);margin-bottom:4px;}
+.team-role{font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:12px;}
+.team-skills{font-size:0.78rem;color:var(--grey);line-height:1.65;}
+
+/* ─── TESTIMONIALS ─── */
+#testimonials{background:var(--redark);}
+
+.testi-carousel{
+  position:relative;margin-top:56px;overflow:hidden;
+}
+
+.testi-track{
+  display:flex;transition:transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+
+.testi-slide{
+  min-width:100%;padding:0 4px;
+}
+
+.testi-card{
+  background:rgba(7,7,7,0.5);border:1px solid rgba(139,0,0,0.3);
+  padding:56px 64px;max-width:800px;margin:0 auto;
+  text-align:center;border-radius:2px;
+}
+
+.testi-big-quote{
+  font-family:'Playfair Display',serif;
+  font-size:5rem;color:var(--red);opacity:0.4;
+  line-height:0.6;display:block;margin-bottom:28px;
+}
+
+.testi-text{
+  font-family:'Playfair Display',serif;
+  font-size:1.25rem;font-style:italic;
+  color:var(--white);line-height:1.8;margin-bottom:32px;
+}
+
+.testi-author{font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);}
+.testi-biz{font-size:0.75rem;color:var(--grey);margin-top:4px;}
+
+.testi-controls{
+  display:flex;align-items:center;justify-content:center;gap:16px;
+  margin-top:40px;
+}
+
+.testi-btn{
+  width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--border);
+  background:transparent;color:var(--white);
+  font-size:1rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color 0.2s,background 0.2s;
+}
+.testi-btn:hover{border-color:var(--red);background:rgba(139,0,0,0.2);}
+
+.testi-dots{display:flex;gap:8px;}
+.testi-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(139,0,0,0.3);cursor:pointer;
+  transition:background 0.2s,transform 0.2s;
+}
+.testi-dot.active{background:var(--red);transform:scale(1.3);}
+
+/* ─── CONTACT ─── */
+#contact{background:var(--dark);}
+
+.contact-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;margin-top:56px;
+}
+
+.c-info-item{
+  display:flex;align-items:flex-start;gap:16px;margin-bottom:28px;
+}
+.c-icon{
+  width:42px;height:42px;flex-shrink:0;
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;color:var(--red);border-radius:2px;
+}
+.c-label{font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--grey);margin-bottom:3px;}
+.c-val{font-size:0.9rem;color:var(--white);}
+.c-val a{color:var(--white);text-decoration:none;transition:color 0.2s;}
+.c-val a:hover{color:var(--red);}
+
+.c-form{display:flex;flex-direction:column;gap:14px;}
+.c-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.c-group{display:flex;flex-direction:column;gap:5px;}
+.c-lbl{font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--grey);}
+
+.c-input,.c-textarea{
+  background:rgba(139,0,0,0.05);
+  border:1px solid var(--borderl);
+  color:var(--white);padding:12px 14px;
+  font-family:'Inter',sans-serif;font-size:0.86rem;
+  outline:none;border-radius:2px;
+  transition:border-color 0.2s,background 0.2s;
+}
+.c-input:focus,.c-textarea:focus{
+  border-color:var(--red);background:rgba(139,0,0,0.08);
+}
+.c-textarea{height:110px;resize:none;}
+::placeholder{color:rgba(133,126,121,0.5);}
+
+.c-submit{
+  background:var(--red);color:var(--white);border:none;
+  padding:14px 32px;border-radius:50px;
+  font-size:0.8rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  cursor:pointer;align-self:flex-start;
+  transition:background 0.2s,transform 0.2s;
+}
+.c-submit:hover{background:var(--red2);transform:translateY(-2px);}
+
+/* ─── FOOTER ─── */
+footer{
+  background:var(--black);
+  border-top:1px solid var(--borderl);
+  padding:64px 6vw 32px;
+}
+
+.footer-top{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:48px;margin-bottom:48px;
+}
+
+.footer-brand{}
+.footer-logo-text{
+  font-family:'Playfair Display',serif;
+  font-size:1.8rem;font-weight:900;
+  color:var(--white);letter-spacing:0.2em;margin-bottom:14px;
+}
+.footer-logo-text span{color:var(--red);}
+.footer-about{font-size:0.84rem;color:var(--grey);line-height:1.7;max-width:280px;}
+
+.footer-col-title{
+  font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--white);margin-bottom:20px;
+}
+
+.footer-links-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.footer-links-list a{
+  font-size:0.83rem;color:var(--grey);text-decoration:none;transition:color 0.2s;
+}
+.footer-links-list a:hover{color:var(--red);}
+
+.footer-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;
+  border-top:1px solid var(--borderl);
+  padding-top:24px;
+}
+
+.footer-copy{font-size:0.75rem;color:var(--grey);}
+
+.footer-socials{display:flex;gap:14px;}
+.social-link{
+  width:34px;height:34px;border-radius:50%;
+  border:1px solid var(--borderl);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.85rem;color:var(--grey);text-decoration:none;
+  transition:border-color 0.2s,color 0.2s;
+}
+.social-link:hover{border-color:var(--red);color:var(--red);}
+
+/* ─── SCROLL REVEAL ─── */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.8s ease,transform 0.8s ease;}
+.reveal.up{transform:translateY(40px);}
+.reveal.left{transform:translateX(-40px);}
+.reveal.right{transform:translateX(40px);}
+.reveal.visible{opacity:1;transform:translate(0);}
+
+/* ─── ANIMATIONS ─── */
+@keyframes slideRight{from{opacity:0;transform:translateX(-32px);}to{opacity:1;transform:translateX(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes pulse{0%,100%{box-shadow:0 0 12px var(--red);}50%{box-shadow:0 0 24px var(--red),0 0 40px rgba(139,0,0,0.3);}}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1024px){
+  .plans-grid{grid-template-columns:repeat(2,1fr);}
+  .footer-top{grid-template-columns:1fr 1fr;}
+}
+
+@media(max-width:768px){
+  #hero{grid-template-columns:1fr;padding-top:100px;}
+  .hero-right{display:none;}
+  .nav-links,.nav-cta{display:none;}
+  .hamburger{display:flex;}
+  .services-grid{grid-template-columns:1fr;}
+  .niches-wrap{grid-template-columns:1fr;}
+  .plans-grid{grid-template-columns:1fr;}
+  .portfolio-grid{grid-template-columns:1fr;}
+  .team-grid{grid-template-columns:repeat(2,1fr);}
+  .contact-grid{grid-template-columns:1fr;}
+  .c-row{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr;}
+  .testi-card{padding:36px 28px;}
+  footer{padding:48px 6vw 24px;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()">✕</button>
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#plans" onclick="toggleMenu()">Plans</a>
+  <a href="#portfolio" onclick="toggleMenu()">Portfolio</a>
+  <a href="#team" onclick="toggleMenu()">Team</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">VAN<span>T</span>YX</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#niches">Niches</a></li>
+    <li><a href="#plans">Plans</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://wa.me/919034435296" class="nav-cta" target="_blank">Get Started</a>
+  <button class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+
+  <div class="hero-left">
+    
+    <h1 class="hero-title">We Build Brands<br>That <em>Command</em><br>Attention</h1>
+    <p class="hero-sub">Empires Aren't Built by Accident. — Websites, AI Chatbots, Marketing, Video & Automation, all engineered to dominate.</p>
+    <div class="hero-btns">
+      <a href="#plans" class="btn-red">View Plans</a>
+      <a href="https://wa.me/919034435296" class="btn-ghost" target="_blank">Book a Call →</a>
+    </div>
+    <div class="hero-stats">
+      <div><span class="stat-n">6+</span><span class="stat-l">Services</span></div>
+      <div><span class="stat-n">4</span><span class="stat-l">Specialists</span></div>
+      <div><span class="stat-n">∞</span><span class="stat-l">Ambition</span></div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-mockup">
+      <div class="mockup-tag">Est. 2024</div>
+      <div class="mockup-logo">VAN<span>T</span>YX</div>
+      <div class="mockup-tagline">"Empires Aren't Built by Accident."</div>
+      <div class="mockup-services">
+        <span class="mockup-pill">Web Dev</span>
+        <span class="mockup-pill">AI Chatbots</span>
+        <span class="mockup-pill">Marketing</span>
+        <span class="mockup-pill">Video</span>
+        <span class="mockup-pill">Automation</span>
+        <span class="mockup-pill">E-Commerce</span>
+      </div>
+      <div class="mockup-divider"></div>
+      <div class="mockup-bottom">
+        <span class="mockup-since">Sonipat, India</span>
+        <span class="mockup-dot"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-top reveal left">
+    <div>
+      <div class="s-eyebrow">What We Do</div>
+      <h2 class="s-title">Six Ways We Grow<br><em>Your Business</em></h2>
+    </div>
+    <p class="s-sub" style="max-width:340px;">Every service is engineered to generate measurable results — not just look good.</p>
+  </div>
+  <div class="services-grid reveal up">
+    <div class="svc-card"><span class="svc-num">01</span><span class="svc-icon">🌐</span><div class="svc-name">Web Development</div><p class="svc-desc">High-converting websites built to turn visitors into paying clients. Mobile-first, fast, and built to rank.</p></div>
+    <div class="svc-card"><span class="svc-num">02</span><span class="svc-icon">🤖</span><div class="svc-name">AI Chatbots</div><p class="svc-desc">24/7 intelligent chatbots that handle inquiries, book appointments, and capture leads — while you sleep.</p></div>
+    <div class="svc-card"><span class="svc-num">03</span><span class="svc-icon">📈</span><div class="svc-name">Digital Marketing</div><p class="svc-desc">Targeted ads, SEO, and social strategies that bring real paying customers to your door.</p></div>
+    <div class="svc-card"><span class="svc-num">04</span><span class="svc-icon">🎬</span><div class="svc-name">Video Editing</div><p class="svc-desc">Reels, promos, and ad creatives that stop the scroll and build undeniable brand identity.</p></div>
+    <div class="svc-card"><span class="svc-num">05</span><span class="svc-icon">⚡</span><div class="svc-name">AI Automation</div><p class="svc-desc">Intelligent pipelines that automate workflows, emails, and operations — saving hours every single day.</p></div>
+    <div class="svc-card"><span class="svc-num">06</span><span class="svc-icon">🛒</span><div class="svc-name">E-Commerce</div><p class="svc-desc">Complete online stores with payment integration, product management, and conversion optimization.</p></div>
+  </div>
+</section>
+
+<!-- NICHES -->
+<section id="niches">
+  <div class="niches-wrap">
+    <div class="reveal left">
+      <div class="s-eyebrow">Who We Serve</div>
+      <h2 class="s-title">Industries We<br><em>Specialise In</em></h2>
+      <div class="red-rule"></div>
+      <p class="s-sub">We don't work with everyone. We work with businesses serious about growth.</p>
+      <br/><br/>
+      <a href="#contact" class="btn-red" style="display:inline-block;">Work With Us</a>
+    </div>
+    <div class="niches-grid reveal right">
+      <div class="niche-item"><span class="niche-icon">🦷</span><span class="niche-name">Dental Clinics</span></div>
+      <div class="niche-item"><span class="niche-icon">📚</span><span class="niche-name">Coaching</span></div>
+      <div class="niche-item"><span class="niche-icon">🏠</span><span class="niche-name">Real Estate</span></div>
+      <div class="niche-item"><span class="niche-icon">⚖️</span><span class="niche-name">CA & Law</span></div>
+      <div class="niche-item"><span class="niche-icon">💪</span><span class="niche-name">Gyms</span></div>
+      <div class="niche-item"><span class="niche-icon">🏨</span><span class="niche-name">Hotels</span></div>
+      <div class="niche-item"><span class="niche-icon">💎</span><span class="niche-name">Jewellery</span></div>
+      <div class="niche-item"><span class="niche-icon">🏥</span><span class="niche-name">Clinics</span></div>
+      <div class="niche-item"><span class="niche-icon">🎨</span><span class="niche-name">Creative Brands</span></div>
+      <div class="niche-item"><span class="niche-icon">🚗</span><span class="niche-name">Driving Schools</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANS -->
+<section id="plans">
+  <div class="plans-header reveal up">
+    <div class="s-eyebrow">Pricing</div>
+    <h2 class="s-title">Choose Your<br><em>Weapon</em></h2>
+    <div class="red-rule"></div>
+    <p class="s-sub">Six plans for every stage — from launch to full market dominance.</p>
+  </div>
+  <div class="plans-grid reveal up">
+
+    <div class="plan-card">
+      <div class="plan-name">Digital Birth</div>
+      <div class="plan-for">Just starting out</div>
+      <div class="plan-price">₹6,999 <sub>one time</sub></div>
+      <div class="plan-sep"></div>
+      <ul class="plan-features">
+        <li>Professional landing page</li>
+        <li>Mobile responsive design</li>
+        <li>Contact & inquiry form</li>
+        <li>Basic SEO setup</li>
+        <li>Google Business setup</li>
+        <li>1 promo reel</li>
+      </ul>
+      <a href="https://wa.me/919034435296" class="plan-btn" target="_blank">Get Started</a>
+    </div>
+
+    <div class="plan-card hot">
+      <div class="plan-badge">Most Popular</div>
+      <div class="plan-name">Lead Machine</div>
+      <div class="plan-for">Growing, needs more leads</div>
+      <div class="plan-price">₹9,999 <sub>one time</sub></div>
+      <div class="plan-sep"></div>
+      <ul class="plan-features">
+        <li>Full website — 3 to 5 pages</li>
+        <li>AI Chatbot integration</li>
+        <li>WhatsApp booking redirect</li>
+        <li>Mobile responsive</li>
+        <li>Basic SEO</li>
+        <li>2 revision rounds</li>
+      </ul>
+      <a href="https://wa.me/919034435296" class="plan-btn" target="_blank">Get Started</a>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-name">Brand Builder</div>
+      <div class="plan-for">Established, going premium</div>
+      <div class="plan-price">₹12,999 <sub>one time</sub></div>
+      <div class="plan-sep"></div>
+      <ul class="plan-features">
+        <li>Premium website — 5 to 7 pages</li>
+        <li>Brand identity design</li>
+        <li>3 promo reels</li>
+        <li>Social media setup</li>
+        <li>Full SEO optimization</li>
+        <li>3 revision rounds</li>
+      </ul>
+      <a href="https://wa.me/919034435296" class="plan-btn" target="_blank">Get Started</a>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-name">Dominator</div>
+      <div class="plan-for">Ready to own the market</div>
+      <div class="plan-price">₹19,999 <sub>one time</sub></div>
+      <div class="plan-sep"></div>
+      <ul class="plan-features">
+        <li>Full premium website</li>
+        <li>AI Chatbot + automation</li>
+        <li>1 month social media mgmt</li>
+        <li>Google & Meta ads setup</li>
+        <li>5 promo videos</li>
+        <li>Full SEO setup</li>
+      </ul>
+      <a href="https://wa.me/919034435296" class="plan-btn" target="_blank">Get Started</a>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-name">E-Commerce Launch</div>
+      <div class="plan-for">Selling products online</div>
+      <div class="plan-price">₹24,999 <sub>one time</sub></div>
+      <div class="plan-sep"></div>
+      <ul class="plan-features">
+        <li>Full e-commerce store</li>
+        <li>Payment gateway</li>
+        <li>AI customer support bot</li>
+        <li>3 product promo reels</li>
+        <li>Social media ads setup</li>
+        <li>Product listing setup</li>
+      </ul>
+      <a href="https://wa.me/919034435296" class="plan-btn" target="_blank">Get Started</a>
+    </div>
+
+    <div class="plan-card hot">
+      <div class="plan-badge">Best Value</div>
+      <div class="plan-name">Monthly Retainer</div>
+      <div class="plan-for">Consistent ongoing growth</div>
+      <div class="plan-price">₹4,999 <sub>/ month</sub></div>
+      <div class="plan-sep"></div>
+      <ul class="plan-features">
+        <li>Monthly website updates</li>
+        <li>8 social media posts</li>
+        <li>2 reels per month</li>
+        <li>Chatbot maintenance</li>
+        <li>Performance report</li>
+        <li>Priority support</li>
+      </ul>
+      <a href="https://wa.me/919034435296" class="plan-btn" target="_blank">Get Started</a>
+    </div>
+
+  </div>
+
+  <!-- MARKETING ONLY PACKAGES -->
+  <div style="margin-top:56px;border-top:1px solid var(--borderl);padding-top:56px;">
+    <div class="s-eyebrow" style="margin-bottom:14px;">Marketing Only</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--white);margin-bottom:10px;">Just Need <em style="color:var(--red);font-style:italic;">Marketing?</em></h3>
+    <p style="font-size:.9rem;color:var(--grey);margin-bottom:36px;max-width:500px;">Already have a website? We handle your entire digital presence — ads, content, social, growth.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;">
+
+      <div class="plan-card">
+        <div class="plan-name">Social Starter</div>
+        <div class="plan-for">Build your social presence</div>
+        <div class="plan-price">&#8377;2,999 <sub>/ month</sub></div>
+        <div class="plan-sep"></div>
+        <ul class="plan-features">
+          <li>8 social media posts/month</li>
+          <li>2 reels per month</li>
+          <li>AI content creation</li>
+          <li>Basic page management</li>
+          <li>Monthly performance report</li>
+        </ul>
+        <a href="https://wa.me/919034435296" class="plan-btn" target="_blank">Get Started</a>
+      </div>
+
+      <div class="plan-card hot">
+        <div class="plan-badge">Popular</div>
+        <div class="plan-name">Growth Engine</div>
+        <div class="plan-for">Social + paid ads combined</div>
+        <div class="plan-price">&#8377;5,999 <sub>/ month</sub></div>
+        <div class="plan-sep"></div>
+        <ul class="plan-features">
+          <li>16 social media posts/month</li>
+          <li>4 reels + UGC ads</li>
+          <li>Meta &amp; Google ads management</li>
+          <li>AI content automation</li>
+          <li>Weekly performance report</li>
+          <li>Monthly strategy call</li>
+        </ul>
+        <a href="https://wa.me/919034435296" class="plan-btn" target="_blank">Get Started</a>
+      </div>
+
+      <div class="plan-card">
+        <div class="plan-name">Full Domination</div>
+        <div class="plan-for">Complete marketing takeover</div>
+        <div class="plan-price">&#8377;9,999 <sub>/ month</sub></div>
+        <div class="plan-sep"></div>
+        <ul class="plan-features">
+          <li>Unlimited posts + reels</li>
+          <li>UGC ads + video creatives</li>
+          <li>Meta + Google + SEO</li>
+          <li>Full AI content pipeline</li>
+          <li>Daily campaign monitoring</li>
+          <li>Dedicated account manager</li>
+        </ul>
+        <a href="https://wa.me/919034435296" class="plan-btn" target="_blank">Get Started</a>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="reveal up">
+    <div class="s-eyebrow">Our Work</div>
+    <h2 class="s-title">Built by<br><em>VANTYX</em></h2>
+    <div class="red-rule"></div>
+    <p class="s-sub">Real projects. Real results.</p>
+  </div>
+  <div class="portfolio-grid reveal up">
+    <div class="port-card">
+      <div class="port-thumb">
+        <iframe src="https://smile-clinic-dental.netlify.app" title="Dental Demo" loading="lazy"></iframe>
+        <div class="port-overlay"></div>
+      </div>
+      <div class="port-info">
+        <div class="port-tag">Web Development · AI Chatbot</div>
+        <div class="port-title">Smile Clinic — Dental Demo</div>
+        <p class="port-desc">Full dental clinic website with AI chatbot and appointment booking.</p>
+        <a href="https://smile-clinic-dental.netlify.app" class="port-link" target="_blank">View Live →</a>
+      </div>
+    </div>
+    <div class="port-card">
+      <div class="port-thumb">🎨</div>
+      <div class="port-info">
+        <div class="port-tag">E-Commerce · Shopify</div>
+        <div class="port-title">Kulture Art</div>
+        <p class="port-desc">Shopify migration and e-commerce setup for an art brand — clean, conversion-focused.</p>
+        <a href="#contact" class="port-link">In Progress →</a>
+      </div>
+    </div>
+    <div class="port-card">
+      <div class="port-thumb">🏠</div>
+      <div class="port-info">
+        <div class="port-tag">Web Development · Real Estate</div>
+        <div class="port-title">Real Estate Demo</div>
+        <p class="port-desc">Property listing site with search, filter, and AI inquiry chatbot. Coming soon.</p>
+        <a href="#contact" class="port-link">Coming Soon →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="reveal up">
+    <div class="s-eyebrow">The People</div>
+    <h2 class="s-title">Meet the<br><em>Team</em></h2>
+    <div class="red-rule"></div>
+    <p class="s-sub">Four specialists. One mission — your growth.</p>
+  </div>
+  <div class="team-grid reveal up">
+    <div class="team-card">
+      <div class="team-av">A</div>
+      <div class="team-name">Ayush</div>
+      <div class="team-role">Founder & Chairman</div>
+      <p class="team-skills">Web Dev · AI Chatbots · Figma · Client Strategy · Business Development</p>
+    </div>
+    <div class="team-card">
+      <div class="team-av">A</div>
+      <div class="team-name">Aadi</div>
+      <div class="team-role">Co-Founder & CEO</div>
+      <p class="team-skills">Video Editing · Reels & Shorts · Ad Creatives · Content Strategy</p>
+    </div>
+    <div class="team-card">
+      <div class="team-av">J</div>
+      <div class="team-name">Jatin</div>
+      <div class="team-role">Marketing Associate</div>
+      <p class="team-skills">UGC Ads · Social Media Marketing · Digital Marketing · AI Content Creation · AI Automation</p>
+    </div>
+    <div class="team-card">
+      <div class="team-av">C</div>
+      <div class="team-name">Carlos</div>
+      <div class="team-role">Tech Lead</div>
+      <p class="team-skills">Fullstack Dev · AI Agentic Systems · OpenAI · Claude · LangChain · SaaS Development · E-Commerce · Automation Pipelines · Game Development</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="reveal up">
+    <div class="s-eyebrow">What Clients Say</div>
+    <h2 class="s-title">Words That<br><em>Matter</em></h2>
+    <div class="red-rule"></div>
+  </div>
+  <div class="testi-carousel reveal up">
+    <div class="testi-track" id="testiTrack">
+      <div class="testi-slide">
+        <div class="testi-card">
+          <span class="testi-big-quote">"</span>
+          <p class="testi-text">VANTYX built our online presence from scratch. Professional, fast, and they actually understand what a business needs to grow.</p>
+          <div class="testi-author">Kulture Art</div>
+          <div class="testi-biz">Art Brand — Founding Client</div>
+        </div>
+      </div>
+      <div class="testi-slide">
+        <div class="testi-card">
+          <span class="testi-big-quote">"</span>
+          <p class="testi-text">The demo they showed us was exactly what our clinic needed. Impressive work from a team that clearly knows digital inside out.</p>
+          <div class="testi-author">Sharma Dental</div>
+          <div class="testi-biz">Dental Clinic — Sonipat</div>
+        </div>
+      </div>
+      <div class="testi-slide">
+        <div class="testi-card">
+          <span class="testi-big-quote">"</span>
+          <p class="testi-text">Young team with serious skills. They know digital better than agencies charging five times the price. Highly recommend.</p>
+          <div class="testi-author">Debate Club</div>
+          <div class="testi-biz">Organisation — Client</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-controls">
+      <button class="testi-btn" onclick="testiPrev()">←</button>
+      <div class="testi-dots" id="testiDots"></div>
+      <button class="testi-btn" onclick="testiNext()">→</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="reveal up">
+    <div class="s-eyebrow">Let's Talk</div>
+    <h2 class="s-title">Start Your<br><em>Project Today</em></h2>
+    <div class="red-rule"></div>
+  </div>
+  <div class="contact-grid reveal up">
+    <div>
+      <div class="c-info-item">
+        <div class="c-icon">📱</div>
+        <div><div class="c-label">WhatsApp</div><div class="c-val"><a href="https://wa.me/919034435296" target="_blank">+91 90344 35296</a></div></div>
+      </div>
+      <div class="c-info-item">
+        <div class="c-icon">✉️</div>
+        <div><div class="c-label">Email</div><div class="c-val"><a href="mailto:vantyxstudio26@gmail.com">vantyxstudio26@gmail.com</a></div></div>
+      </div>
+      <div class="c-info-item">
+        <div class="c-icon">📸</div>
+        <div><div class="c-label">Instagram</div><div class="c-val"><a href="https://instagram.com/vantyx.studios" target="_blank">@vantyx.studios</a></div></div>
+      </div>
+      <div class="c-info-item">
+        <div class="c-icon">📍</div>
+        <div><div class="c-label">Location</div><div class="c-val">Sonipat, Haryana, India</div></div>
+      </div>
+      <br/>
+      <a href="https://wa.me/919034435296" class="btn-red" target="_blank" style="display:inline-block;">Message on WhatsApp →</a>
+    </div>
+    <div class="c-form">
+      <div class="c-row">
+        <div class="c-group"><label class="c-lbl">Your Name</label><input class="c-input" placeholder="Your name" id="cName"/></div>
+        <div class="c-group"><label class="c-lbl">Business Name</label><input class="c-input" placeholder="Your business" id="cBiz"/></div>
+      </div>
+      <div class="c-group"><label class="c-lbl">Phone / Email</label><input class="c-input" placeholder="How to reach you" id="cContact"/></div>
+      <div class="c-group"><label class="c-lbl">What do you need?</label><textarea class="c-textarea" placeholder="Tell us about your project..." id="cMsg"></textarea></div>
+      <button class="c-submit" onclick="submitForm()">Send Message →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo-text">VAN<span>T</span>YX</div>
+      <p class="footer-about">A digital agency built to make businesses dominate online. Websites, AI, Marketing, Video — all under one roof.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links-list">
+        <li><a href="#services">Web Development</a></li>
+        <li><a href="#services">AI Chatbots</a></li>
+        <li><a href="#services">Digital Marketing</a></li>
+        <li><a href="#services">Video Editing</a></li>
+        <li><a href="#services">AI Automation</a></li>
+        <li><a href="#services">E-Commerce</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links-list">
+        <li><a href="#team">Team</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#plans">Pricing</a></li>
+        <li><a href="#niches">Niches</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links-list">
+        <li><a href="https://wa.me/919034435296" target="_blank">WhatsApp</a></li>
+        <li><a href="mailto:vantyxstudio26@gmail.com">Email Us</a></li>
+        <li><a href="https://instagram.com/vantyx.studios" target="_blank">Instagram</a></li>
+        <li><a href="#contact">Get a Quote</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 VANTYX Studio. All rights reserved. Sonipat, India.</div>
+    <div class="footer-socials">
+      <a href="https://instagram.com/vantyx.studios" class="social-link" target="_blank">ig</a>
+      <a href="https://wa.me/919034435296" class="social-link" target="_blank">wa</a>
+      <a href="mailto:vantyxstudio26@gmail.com" class="social-link">@</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Cursor glow
+const glow = document.getElementById('cursorGlow');
+document.addEventListener('mousemove', e => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top  = e.clientY + 'px';
+});
+
+// Navbar scroll
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 80));
+
+// Mobile menu
+function toggleMenu(){ document.getElementById('mobileMenu').classList.toggle('open'); }
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const ro = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if(e.isIntersecting){
+      setTimeout(() => e.target.classList.add('visible'), i * 100);
+      ro.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+reveals.forEach(el => ro.observe(el));
+
+// Testimonial carousel
+let cur = 0;
+let autoTimer = null;
+const slides = document.querySelectorAll('.testi-slide');
+const track  = document.getElementById('testiTrack');
+const dotsC  = document.getElementById('testiDots');
+
+slides.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'testi-dot' + (i === 0 ? ' active' : '');
+  d.onclick = () => { goTo(i); resetTimer(); };
+  dotsC.appendChild(d);
+});
+
+function goTo(n){
+  cur = (n + slides.length) % slides.length;
+  track.style.transform = 'translateX(-' + (cur * 100) + '%)';
+  document.querySelectorAll('.testi-dot').forEach(function(d,i){
+    d.classList.toggle('active', i === cur);
+  });
+}
+function testiNext(){ goTo(cur + 1); }
+function testiPrev(){ goTo(cur - 1); resetTimer(); }
+function resetTimer(){
+  clearInterval(autoTimer);
+  autoTimer = setInterval(testiNext, 4000);
+}
+goTo(0);
+autoTimer = setInterval(testiNext, 4000);
+
+// Contact form → WhatsApp
+function submitForm(){
+  const name    = document.getElementById('cName').value;
+  const biz     = document.getElementById('cBiz').value;
+  const contact = document.getElementById('cContact').value;
+  const msg     = document.getElementById('cMsg').value;
+  if(!name || !contact){ alert('Please fill your name and contact.'); return; }
+  const txt = encodeURIComponent(
+    `Hi VANTYX! I'm ${name} from ${biz}. Contact: ${contact}. Message: ${msg}`
+  );
+  window.open(`https://wa.me/919034435296?text=${txt}`, '_blank');
+}
+</script>
+</body>
+</html>
