@@ -365,7 +365,7 @@ section{padding:96px 6vw;position:relative;}
 .port-link:hover{border-color:var(--gold);}
 
 /* ── TEAM ── */
-.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px;}
+.team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:48px;}
 .team-card{
   background:var(--c1);border:1px solid var(--borderl);
   padding:28px 22px;border-radius:2px;text-align:center;
@@ -601,7 +601,7 @@ footer{background:var(--c0);border-top:1px solid var(--borderl);padding:56px 6vw
   <div class="hero-bg-line" style="left:75%;"></div>
 
   <div class="hero-left">
-    <div class="hero-eyebrow">Digital Agency — Sonipat, India</div>
+    <div class="hero-eyebrow">Digital Agency —  India</div>
     <h1 class="hero-title">We Build Brands<br>That <em>Command</em><br>Attention</h1>
     <span class="hero-tag">"Empires Aren't Built by Accident."</span>
     <p class="hero-sub">Websites. AI Chatbots. Digital Marketing. Video — everything your business needs to dominate online.</p>
@@ -611,7 +611,7 @@ footer{background:var(--c0);border-top:1px solid var(--borderl);padding:56px 6vw
     </div>
     <div class="hero-stats">
       <div><span class="stat-n">4+</span><span class="stat-l">Services</span></div>
-      <div><span class="stat-n">3</span><span class="stat-l">Specialists</span></div>
+      <div><span class="stat-n">2</span><span class="stat-l">Specialists</span></div>
       <div><span class="stat-n">∞</span><span class="stat-l">Ambition</span></div>
     </div>
   </div>
@@ -890,7 +890,7 @@ footer{background:var(--c0);border-top:1px solid var(--borderl);padding:56px 6vw
     <div class="eyebrow">The People</div>
     <h2 class="s-title">Meet the <em>Team</em></h2>
     <div class="gold-line"></div>
-    <p class="s-sub">Three specialists. One mission — your growth.</p>
+    <p class="s-sub">Two specialists. One mission — your growth.</p>
   </div>
   <div class="team-grid reveal">
     <div class="team-card">
@@ -905,13 +905,8 @@ footer{background:var(--c0);border-top:1px solid var(--borderl);padding:56px 6vw
       <div class="team-role">Co-Founder & CEO</div>
       <p class="team-skills">Video Editing · Reels & Shorts · Ad Creatives · Content Strategy</p>
     </div>
-    <div class="team-card">
-      <div class="team-av">J</div>
-      <div class="team-name">Jatin</div>
-      <div class="team-role">Marketing Associate</div>
-      <p class="team-skills">UGC Ads · Social Media Marketing · Digital Marketing · AI Content Creation · AI Automation</p>
-    </div>
-  </div>
+    
+  
 </section>
 
 <!-- TESTIMONIALS -->
@@ -1145,14 +1140,28 @@ function toggleFaq(el){ el.classList.toggle('open'); }
 
 // Contact form
 function submitForm(){
+
+  let submitting = false;
+function submitForm(){
+  if(submitting) return;
+  submitting = true;
+}
   const name = document.getElementById('cName').value;
   const biz = document.getElementById('cBiz').value;
   const contact = document.getElementById('cContact').value;
   const msg = document.getElementById('cMsg').value;
   if(!name||!contact){ alert('Please fill your name and contact.'); return; }
+
+fetch('https://vantyx.app.n8n.cloud/webhook/d88ae29d-e40d-410c-9aab-82e45c4eb8aa', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: name, business: biz, contact: contact, message: msg })
+  });
+
   const txt = encodeURIComponent('Hi VANTYX! I\'m '+name+' from '+biz+'. Contact: '+contact+'. Message: '+msg);
   window.open('https://wa.me/919034435296?text='+txt, '_blank');
 }
+
 </script>
 </body>
 </html>
