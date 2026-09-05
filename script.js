@@ -1,47 +1,35 @@
+  // Mobile hamburger menu
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinksEl = document.getElementById('navlinks');
+  if (menuToggle && navLinksEl){
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinksEl.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    });
+    navLinksEl.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinksEl.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Open menu');
+      });
+    });
+  }
 
-
-  const vantyxSchema = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "VANTYX",
-  "description": "Autonomous WhatsApp booking engine and lead-recovery automation for Dental Clinics, Hospitality, and Real Estate businesses.",
-  "url": "https://vantyx-studio.netlify.app/",
-  "telephone": "+91-89508-09500",
-  "email": "vantyxstudio26@gmail.com",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Sonipat",
-    "addressRegion": "Haryana",
-    "addressCountry": "IN"
-  },
-  "areaServed": ["Sonipat", "Panipat", "Karnal", "Ambala", "Faridabad", "Gurugram", "Haryana", "India"],
-  "priceRange": "₹₹",
-  "sameAs": ["https://instagram.com/vantyx.studios"],
-  "makesOffer": [
-    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "WhatsApp Automation Engine"}},
-    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Missed-Call Lead Recovery"}},
-    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Automated Booking & Site-Visit Scheduling"}},
-    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Web Development"}},
-    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Short-Form Video Content"}}
-  ]
-};
-
-// Automation vertical filter
+  // Automation vertical filter
   const filterBtns = document.querySelectorAll('.filter-btn');
   function applyFilter(f){
     document.querySelectorAll('.automation-card').forEach(card => {
       card.style.display = (f === 'all' || card.dataset.vertical === f) ? '' : 'none';
     });
   }
-  if (filterBtns.length) {
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        applyFilter(btn.dataset.filter);
-      });
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilter(btn.dataset.filter);
     });
-  }
+  });
 
   // Dynamically generate tiered packages for every business vertical.
   // Tier 1 (Pilot) mirrors the low-friction ₹1k/₹2k outreach offer; Growth/Scale scale up with volume.
@@ -111,8 +99,22 @@
   });
   applyFilter('all');
 
-
-
+  // Contact form — build a WhatsApp deep link from the entered fields instead of discarding them
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm){
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = contactForm.name.value.trim();
+      const business = contactForm.business.value.trim();
+      const contact = contactForm.contact.value.trim();
+      const need = contactForm.need.value.trim();
+      let msg = `Hi VANTYX, I'm ${name}`;
+      if (business) msg += ` from ${business}`;
+      msg += `. You can reach me at ${contact}.`;
+      if (need) msg += ` ${need}`;
+      window.location.href = 'https://wa.me/918950809500?text=' + encodeURIComponent(msg);
+    });
+  }
 
 (function(){
   const toggle = document.getElementById('vantyx-chat-toggle');
@@ -123,11 +125,18 @@
   const sendBtn = document.getElementById('vantyx-chat-send');
   const quickWrap = document.getElementById('vantyx-chat-quick');
 
-  toggle.addEventListener('click', () => {
-    win.classList.toggle('open');
-    if(win.classList.contains('open')) input.focus();
+  function setChatOpen(open){
+    win.classList.toggle('open', open);
+    win.setAttribute('aria-hidden', String(!open));
+    toggle.setAttribute('aria-expanded', String(open));
+    if (open) input.focus();
+  }
+
+  toggle.addEventListener('click', () => setChatOpen(!win.classList.contains('open')));
+  closeBtn.addEventListener('click', () => setChatOpen(false));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && win.classList.contains('open')) setChatOpen(false);
   });
-  closeBtn.addEventListener('click', () => win.classList.remove('open'));
 
   function addMsg(text, who){
     const div = document.createElement('div');
@@ -209,17 +218,48 @@
   });
 })();
 
-function handleLeadSubmission(event) {
-  event.preventDefault();
-  
-  const name = document.getElementById('clientName').value.trim();
-  const business = document.getElementById('businessName').value.trim();
-  const contact = document.getElementById('clientContact').value.trim();
-  const message = document.getElementById('clientMessage').value.trim();
-  
-  const formattedText = `Hi VANTYX, I want to start a project.\n\nName: ${name}\nBusiness: ${business}\nContact: ${contact}\nDetails: ${message}`;
-  
-  const whatsappUrl = `https://wa.me/918950809500?text=${encodeURIComponent(formattedText)}`;
-  
-  window.location.href = whatsappUrl;
-}
+// ============================================================
+// LIGHTWEIGHT MOTION LAYER — zero dependencies, respects prefers-reduced-motion.
+// Header scroll shadow + IntersectionObserver-based scroll reveals.
+// ============================================================
+(function(){
+  // Sticky header shadow once the page scrolls
+  const headerEl = document.querySelector('header');
+  if (headerEl){
+    const toggleHeaderShadow = () => headerEl.classList.toggle('is-scrolled', window.scrollY > 8);
+    toggleHeaderShadow();
+    window.addEventListener('scroll', toggleHeaderShadow, { passive: true });
+  }
+
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion || typeof IntersectionObserver === 'undefined') return;
+
+  // Groups of elements that fade/slide up as they enter the viewport, staggered within each group
+  const revealGroups = [
+    '.service-grid .service-card',
+    '.niche-grid .niche-pill',
+    '.proof-grid .proof-card',
+    '#plans .plan-card',
+    '.port-list .port-row',
+    '.team-grid .team-card',
+    '.test-grid .test-card',
+    '#faq details'
+  ];
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  revealGroups.forEach(selector => {
+    document.querySelectorAll(selector).forEach((el, i) => {
+      el.classList.add('reveal');
+      el.style.transitionDelay = Math.min(i * 60, 300) + 'ms';
+      observer.observe(el);
+    });
+  });
+})();

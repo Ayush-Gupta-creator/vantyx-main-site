@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vantyx-studio.netlify.app/sitemap.xml
