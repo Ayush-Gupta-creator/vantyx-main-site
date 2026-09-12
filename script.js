@@ -1,503 +1,264 @@
-<!DOCTYPE html>
-<html lang="en-IN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VANTYX — 24/7 WhatsApp Booking Engine for Dental, Hospitality & Real Estate</title>
-<meta name="description" content="VANTYX installs a 24/7 automated WhatsApp booking engine for Dental Clinics, Hospitality, and Real Estate — recovering missed calls and after-hours inquiries before they go to a competitor. 14-day risk-free pilot.">
-<meta name="keywords" content="WhatsApp automation for dental clinics, missed call lead recovery, automated booking engine, WhatsApp business assistant India, real estate lead qualification automation, hotel and restaurant WhatsApp bookings, Sonipat Haryana automation agency">
-<meta name="robots" content="index, follow">
-<meta name="author" content="VANTYX Studio">
-<meta name="theme-color" content="#0b0b0d">
-<meta name="format-detection" content="telephone=no">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230b0b0d'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' font-weight='700' fill='%23d4af5a' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230b0b0d'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' font-weight='700' fill='%23d4af5a' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
-<link rel="canonical" href="https://vantyx-studio.netlify.app/">
-
-<!-- Open Graph -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="VANTYX — 24/7 WhatsApp Booking Engine for Local Businesses">
-<meta property="og:description" content="Never lose a patient, booking, or lead to a slower response. 30-second automated WhatsApp assistant for Dental Clinics, Hospitality & Real Estate. 14-day risk-free pilot.">
-<meta property="og:url" content="https://vantyx-studio.netlify.app/">
-<meta property="og:site_name" content="VANTYX">
-<meta property="og:locale" content="en_IN">
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="VANTYX — 24/7 WhatsApp Booking Engine for Local Businesses">
-<meta name="twitter:description" content="Never lose a patient, booking, or lead to a slower response. 30-second automated WhatsApp assistant for Dental Clinics, Hospitality & Real Estate. 14-day risk-free pilot.">
-
-<!-- Structured Data -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "VANTYX",
-  "description": "Autonomous WhatsApp booking engine and lead-recovery automation for Dental Clinics, Hospitality, and Real Estate businesses.",
-  "url": "https://vantyx-studio.netlify.app/",
-  "telephone": "+91-89508-09500",
-  "email": "vantyxstudio26@gmail.com",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Sonipat",
-    "addressRegion": "Haryana",
-    "addressCountry": "IN"
-  },
-  "areaServed": ["Sonipat", "Panipat", "Karnal", "Ambala", "Faridabad", "Gurugram", "Haryana", "India"],
-  "priceRange": "₹₹",
-  "sameAs": ["https://instagram.com/vantyx.studios"],
-  "makesOffer": [
-    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "WhatsApp Automation Engine"}},
-    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Missed-Call Lead Recovery"}},
-    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Automated Booking & Site-Visit Scheduling"}},
-    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Web Development"}},
-    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Short-Form Video Content"}}
-  ]
-}
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {"@type": "Question", "name": "Will this replace my receptionist / front desk?", "acceptedAnswer": {"@type": "Answer", "text": "No — it covers the moments your front desk can't: after hours, during rush, and the 30+ minutes it takes to call back a missed inquiry. Your team still runs the desk; the WhatsApp engine just makes sure nothing falls through the cracks before they can get to it."}},
-    {"@type": "Question", "name": "How fast does setup take?", "acceptedAnswer": {"@type": "Answer", "text": "Under 24 hours. We connect your phone line, website, or Instagram page, configure the booking flow for your business, and it's live — no waiting weeks for a build."}},
-    {"@type": "Question", "name": "What if a patient or customer asks a complex question?", "acceptedAnswer": {"@type": "Answer", "text": "The assistant handles the standard 80% — hours, availability, pricing ranges, booking — instantly. Anything it can't answer gets flagged and routed straight to your team on WhatsApp, so no inquiry is ever left hanging."}},
-    {"@type": "Question", "name": "Why is the pilot price so low?", "acceptedAnswer": {"@type": "Answer", "text": "Because we'd rather prove it works with real bookings than sell you on a promise. Setup and monthly cost depend on your industry and volume — message us on WhatsApp and we'll quote a low-friction pilot to get you live risk-free."}},
-    {"@type": "Question", "name": "How does payment work?", "acceptedAnswer": {"@type": "Answer", "text": "A one-time setup fee plus a monthly fee, paid via UPI — the exact amount depends on your industry and volume tier. Message us on WhatsApp for your quote. No long-term lock-in required."}},
-    {"@type": "Question", "name": "Do you work outside Sonipat?", "acceptedAnswer": {"@type": "Answer", "text": "Absolutely. We work with businesses across Haryana — Panipat, Karnal, Ambala, Faridabad, Gurugram — and beyond. Everything is handled online and set up remotely."}}
-  ]
-}
-</script>
-
-<link rel="stylesheet" href="style.css">
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-<script>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", (user) => {
-      if (!user) {
-        window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; });
-      }
+  // Mobile hamburger menu
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinksEl = document.getElementById('navlinks');
+  if (menuToggle && navLinksEl){
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinksEl.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    });
+    navLinksEl.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinksEl.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Open menu');
+      });
     });
   }
-</script>
-</head>
-<body>
 
-<a class="skip-link" href="#main">Skip to content</a>
+  // Automation vertical filter
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  function applyFilter(f){
+    document.querySelectorAll('.automation-card').forEach(card => {
+      card.style.display = (f === 'all' || card.dataset.vertical === f) ? '' : 'none';
+    });
+  }
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilter(btn.dataset.filter);
+    });
+  });
 
-<header>
-  <nav class="wrap" aria-label="Primary">
-    <div class="logo">VANTYX</div>
-    <div class="navlinks" id="navlinks">
-      <a href="#services">Services</a>
-      <a href="#niches">Niches</a>
-      <a href="#proof">Proof</a>
-      <a href="#plans">Plans</a>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#team">Team</a>
-      <a href="#faq">FAQ</a>
-    </div>
-    <div class="nav-right">
-      <a class="btn btn-gold nav-cta" href="https://wa.me/918950809500?text=Hi%20VANTYX%2C%20I%27d%20like%20to%20claim%20the%2014-Day%20Zero-Risk%20Pilot.">Claim Pilot</a>
-      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navlinks">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
-</header>
+  const tierNames = ['Pilot', 'Growth', 'Scale'];
+  const tierBtnClass = ['btn-outline', 'btn-gold', 'btn-outline'];
 
-<main id="main">
+  function waLink(text){
+    return 'https://wa.me/918950809500?text=' + encodeURIComponent(text);
+  }
 
-<section class="hero">
-  <div class="wrap">
-    <div class="hero-tag">Autonomous Vertical Operating System — India</div>
-    <h1>Never Lose a Patient, Booking, or Lead to a <em>Slower Response</em></h1>
-    <div class="hero-sub">30-Second Automated WhatsApp Conversational Assistant for Local Businesses.</div>
-    <p class="hero-desc">We install a 24/7 WhatsApp engine for Dental Clinics, Hospitality, and Real Estate that automatically responds to missed calls and late-night inquiries — locking in appointments before they go to a competitor.</p>
-    <div class="hero-cta">
-      <a class="btn btn-gold" href="https://wa.me/918950809500?text=Hi%20VANTYX%2C%20I%27d%20like%20to%20claim%20the%2014-Day%20Zero-Risk%20Pilot%20(%E2%82%B91k%20Setup).">Claim 14-Day Zero-Risk Pilot (₹1k Setup)</a>
-      <a class="btn btn-outline" href="https://aria-live.netlify.app" target="_blank" rel="noopener">See Live Dental Demo →</a>
-    </div>
-    <div class="stats">
-      <div><div class="stat-num">30 sec</div><div class="stat-label">Avg. Response Time</div></div>
-      <div><div class="stat-num">24/7</div><div class="stat-label">Coverage</div></div>
-      <div><div class="stat-num">3</div><div class="stat-label">Core Verticals</div></div>
-      <div><div class="stat-num">₹0</div><div class="stat-label">Risk If It Doesn't Work</div></div>
-    </div>
-  </div>
-</section>
+  // Renders the pricing grid from CMS-editable data instead of a hardcoded object.
+  function renderPricing(verticalData){
+    const grid = document.getElementById('automationGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    Object.keys(verticalData).forEach(key => {
+      const v = verticalData[key];
+      tierNames.forEach((tierName, i) => {
+        const desc = i === 2 ? `${v.tiers[1]}+ ${v.unit}` : `Up to ${v.tiers[i]} ${v.unit}`;
+        const msg = `Hi VANTYX, I'm interested in the ${v.label} — ${tierName} automation package. Can you share more details?`;
+        const featureList = (v.features[i] || '').split('\n').filter(Boolean);
+        const card = document.createElement('div');
+        card.className = 'plan-card automation-card';
+        card.dataset.vertical = key;
+        card.innerHTML = `
+          <div class="plan-name">${v.label} — ${tierName}</div>
+          <div class="plan-desc">${desc}</div>
+          <div class="plan-price">${v.prices[i]} <span>${v.subs[i]}</span></div>
+          <ul class="plan-list">${featureList.map(f => `<li>${f}</li>`).join('')}</ul>
+          <a class="btn ${tierBtnClass[i]}" href="${waLink(msg)}">Get Started</a>
+        `;
+        grid.appendChild(card);
+      });
+    });
+    applyFilter(document.querySelector('.filter-btn.active')?.dataset.filter || 'all');
+  }
 
-<section id="services">
-  <div class="wrap">
-    <div class="services-head">
-      <div>
-        <div class="eyebrow">The AVOS Engine</div>
-        <h2>One Core System. Two <em>Growth Add-Ons</em>.</h2>
-      </div>
-      <a class="btn btn-outline" href="#contact">Start a Project</a>
-    </div>
-    <div class="service-grid">
-      <div class="service-card featured">
-        <div class="service-num">01</div>
-        <span class="tag-new">Core Engine</span>
-        <div class="service-icon">⚡</div>
-        <h3>WhatsApp Automation Engine</h3>
-        <p>A 24/7 conversational assistant that responds in under 30 seconds — qualifying, booking, and logging every inquiry automatically.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-num">02</div>
-        <div class="service-icon">📞</div>
-        <h3>Missed-Call Lead Recovery</h3>
-        <p>Every missed call triggers an instant WhatsApp follow-up, so no inquiry goes cold while your front desk is busy.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-num">03</div>
-        <div class="service-icon">📅</div>
-        <h3>Automated Booking & Scheduling</h3>
-        <p>Appointments, tables, rooms, and site-visits get locked into your calendar automatically — no manual back-and-forth.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-num">04</div>
-        <span class="tag-new">Add-On</span>
-        <div class="service-icon">🌐</div>
-        <h3>Web Development</h3>
-        <p>A mobile-first landing page built to route every visitor straight into your WhatsApp engine.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-num">05</div>
-        <span class="tag-new">Add-On</span>
-        <div class="service-icon">🎬</div>
-        <h3>Short-Form Video & Content</h3>
-        <p>Reels and Shorts built to drive local attention and feed raw leads straight into your automated flow.</p>
-      </div>
-    </div>
-  </div>
-</section>
+  // Renders the FAQ list from CMS-editable data instead of hardcoded <details> blocks.
+  function renderFaq(faqItems){
+    const container = document.getElementById('faqContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    faqItems.forEach(item => {
+      const details = document.createElement('details');
+      details.innerHTML = `<summary>${item.question} <span>+</span></summary><p>${item.answer}</p>`;
+      container.appendChild(details);
+    });
+  }
 
-<section id="niches">
-  <div class="wrap">
-    <div class="eyebrow">Who We Serve</div>
-    <h2 class="section-title" style="max-width:560px;">3 Verticals. <em>Total Focus.</em></h2>
-    <p style="color:var(--text-dim); margin-top:14px; max-width:560px;">We don't spread thin. Every automation flow is purpose-built for one of three industries.</p>
-    <div class="niche-grid">
-      <div class="niche-pill new"><span>🦷</span>Dental Clinics & Healthcare</div>
-      <div class="niche-pill new"><span>🏨</span>Cafes, Restaurants & Hotels</div>
-      <div class="niche-pill new"><span>🏠</span>Real Estate Developers & Brokers</div>
-    </div>
-  </div>
-</section>
+  // Pull editable content (pricing + FAQ) from the JSON file the admin dashboard writes to.
+  fetch('/content/site-content.json')
+    .then(res => res.json())
+    .then(data => {
+      renderPricing(data.pricing || {});
+      renderFaq(data.faq || []);
+    })
+    .catch(() => {
+      // If this fails (e.g. opened the HTML file directly instead of via a server), the page
+      // still works — pricing grid and FAQ will just be empty until served properly.
+      console.warn('Could not load content/site-content.json — pricing and FAQ will be empty.');
+    });
 
-<section id="proof" class="proof-strip">
-  <div class="wrap">
-    <div class="eyebrow">Proof, Not Promises</div>
-    <h2 class="section-title" style="max-width:600px;">What Our Systems Actually <em>Do</em></h2>
-    <p style="color:var(--text-dim); margin-top:14px; max-width:560px;">We're a young team — so instead of vague claims, here's exactly what our automation and web systems handle in production.</p>
-    <div class="proof-grid">
-      <div class="proof-card">
-        <div class="n">Zero manual follow-ups</div>
-        <p>Automated WhatsApp reminders trigger 7 days before and 3 days after key dates — no staff involvement.</p>
-      </div>
-      <div class="proof-card">
-        <div class="n">Daily owner reports</div>
-        <p>Scheduled automations pull live data and send a daily summary straight to the owner's phone.</p>
-      </div>
-      <div class="proof-card">
-        <div class="n">5–7 day delivery</div>
-        <p>Most website builds go from kickoff to live site in under a week, without cutting corners.</p>
-      </div>
-      <div class="proof-card">
-        <div class="n">AI-qualified leads</div>
-        <p>Inquiries are automatically screened and routed via AI before they ever reach a human inbox.</p>
-      </div>
-    </div>
-  </div>
-</section>
+  // Contact form — build a WhatsApp deep link from the entered fields instead of discarding them
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm){
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = contactForm.name.value.trim();
+      const business = contactForm.business.value.trim();
+      const contact = contactForm.contact.value.trim();
+      const need = contactForm.need.value.trim();
+      let msg = `Hi VANTYX, I'm ${name}`;
+      if (business) msg += ` from ${business}`;
+      msg += `. You can reach me at ${contact}.`;
+      if (need) msg += ` ${need}`;
+      window.location.href = 'https://wa.me/918950809500?text=' + encodeURIComponent(msg);
+    });
+  }
 
-<section id="plans">
-  <div class="wrap">
-    <div class="eyebrow">Pricing</div>
-    <h2 class="section-title">The 14-Day <em>Risk-Free Pilot</em></h2>
-    <p class="plans-sub">Remove all the friction. See real bookings land before you commit to anything more.</p>
+(function(){
+  const toggle = document.getElementById('vantyx-chat-toggle');
+  const win = document.getElementById('vantyx-chat-window');
+  const closeBtn = document.getElementById('vantyx-chat-close');
+  const body = document.getElementById('vantyx-chat-body');
+  const input = document.getElementById('vantyx-chat-input');
+  const sendBtn = document.getElementById('vantyx-chat-send');
+  const quickWrap = document.getElementById('vantyx-chat-quick');
 
-    <div class="plan-group-label" style="margin-top:44px;">Tiered Pricing By Industry <span style="color:var(--text-faint); text-transform:none; letter-spacing:0;">(for higher volume, pick your ladder)</span></div>
-    <p style="color:var(--text-dim); font-size:14px; max-width:640px; margin-bottom:24px;">Every vertical starts at Pilot pricing — packages scale only as your inquiry volume grows.</p>
+  function setChatOpen(open){
+    win.classList.toggle('open', open);
+    win.setAttribute('aria-hidden', String(!open));
+    toggle.setAttribute('aria-expanded', String(open));
+    if (open) input.focus();
+  }
 
-    <div class="automation-filter">
-      <button class="filter-btn active" data-filter="all">All Businesses</button>
-      <button class="filter-btn" data-filter="dental">Dental Clinics</button>
-      <button class="filter-btn" data-filter="clinics">Clinics & Hospitals</button>
-      <button class="filter-btn" data-filter="cafe">Cafes & Restaurants</button>
-      <button class="filter-btn" data-filter="hotels">Hotels</button>
-      <button class="filter-btn" data-filter="realestate">Real Estate</button>
-    </div>
+  toggle.addEventListener('click', () => setChatOpen(!win.classList.contains('open')));
+  closeBtn.addEventListener('click', () => setChatOpen(false));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && win.classList.contains('open')) setChatOpen(false);
+  });
 
-    <div class="plan-grid" id="automationGrid">
-      <!-- All verticals are generated dynamically by JS below -->
-    </div>
+  function addMsg(text, who){
+    const div = document.createElement('div');
+    div.className = 'chat-msg ' + who;
+    div.innerHTML = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
 
-    <div class="plan-group-label" style="margin-top:56px;">Growth Add-Ons <span style="color:var(--text-faint); text-transform:none; letter-spacing:0;">(stack onto your WhatsApp engine)</span></div>
-    <p style="color:var(--text-dim); font-size:14px; max-width:640px; margin-bottom:24px;">Optional upgrades that feed more traffic into your automated flow — never sold as standalone freelancer packages.</p>
-    <div class="plan-grid" style="grid-template-columns:repeat(2,1fr);">
-      <div class="plan-card">
-        <div class="plan-name">High-Converting Web Build</div>
-        <div class="plan-desc">Mobile-first landing page</div>
-        <div class="plan-price">₹6,999 <span>one time</span></div>
-        <ul class="plan-list">
-          <li>Mobile-first page routed to your WhatsApp engine</li>
-          <li>Fast load, built to rank</li>
-          <li>Contact & inquiry capture</li>
-          <li>Basic SEO setup</li>
-        </ul>
-        <a class="btn btn-outline" href="https://wa.me/918950809500?text=Hi%20VANTYX%2C%20I%27m%20interested%20in%20the%20High-Converting%20Web%20Build%20add-on.%20Can%20you%20share%20more%20details%3F">Add This</a>
-      </div>
-      <div class="plan-card">
-        <div class="plan-name">Short-Form Video & Content Engine</div>
-        <div class="plan-desc">8 Reels/Shorts per month</div>
-        <div class="plan-price">₹4,999 <span>/ month</span></div>
-        <ul class="plan-list">
-          <li>8 Reels/Shorts per month</li>
-          <li>Built to drive local traffic to WhatsApp</li>
-          <li>Ad-creative ready cuts</li>
-          <li>Monthly performance notes</li>
-        </ul>
-        <a class="btn btn-outline" href="https://wa.me/918950809500?text=Hi%20VANTYX%2C%20I%27m%20interested%20in%20the%20Short-Form%20Video%20%26%20Content%20Engine%20add-on.%20Can%20you%20share%20more%20details%3F">Add This</a>
-      </div>
-    </div>
+  const waBase = 'https://wa.me/918950809500?text=';
+  function waLink(msg){ return waBase + encodeURIComponent(msg); }
 
-    <div class="plan-group-label" style="margin-top:56px;">Additional Automation Modules <span style="color:var(--text-faint); text-transform:none; letter-spacing:0;">(stack with any package above)</span></div>
-    <p style="color:var(--text-dim); font-size:14px; max-width:640px; margin-bottom:28px;">Modular extras that apply regardless of your business type.</p>
-    <div class="plan-grid">
-      <div class="plan-card">
-        <div class="plan-name">Review & Reputation Automation</div>
-        <div class="plan-desc">Add-on module</div>
-        <div class="plan-price">₹4,999 <span>setup + ₹1,000/mo</span></div>
-        <ul class="plan-list">
-          <li>Auto-request Google/WhatsApp reviews post-visit</li>
-          <li>Instant alert on negative feedback</li>
-          <li>Review link tracking</li>
-        </ul>
-        <a class="btn btn-outline" href="https://wa.me/918950809500?text=Hi%20VANTYX%2C%20I%27m%20interested%20in%20the%20Review%20%26%20Reputation%20Automation%20add-on.%20Can%20you%20share%20more%20details%3F">Add This</a>
-      </div>
-      <div class="plan-card">
-        <div class="plan-name">Lead Capture Automation</div>
-        <div class="plan-desc">Add-on module</div>
-        <div class="plan-price">₹5,999 <span>setup + ₹1,200/mo</span></div>
-        <ul class="plan-list">
-          <li>Every website/social inquiry logged instantly</li>
-          <li>Auto-tagging by source & urgency</li>
-          <li>Zero-delay routing to your phone</li>
-        </ul>
-        <a class="btn btn-outline" href="https://wa.me/918950809500?text=Hi%20VANTYX%2C%20I%27m%20interested%20in%20the%20Lead%20Capture%20Automation%20add-on.%20Can%20you%20share%20more%20details%3F">Add This</a>
-      </div>
-      <div class="plan-card">
-        <div class="plan-name">Customer Retention Automation</div>
-        <div class="plan-desc">Add-on module</div>
-        <div class="plan-price">₹5,999 <span>setup + ₹1,200/mo</span></div>
-        <ul class="plan-list">
-          <li>Automated win-back messages for inactive customers</li>
-          <li>Birthday/anniversary offers</li>
-          <li>Repeat-visit nudges</li>
-        </ul>
-        <a class="btn btn-outline" href="https://wa.me/918950809500?text=Hi%20VANTYX%2C%20I%27m%20interested%20in%20the%20Customer%20Retention%20Automation%20add-on.%20Can%20you%20share%20more%20details%3F">Add This</a>
-      </div>
-      <div class="plan-card">
-        <div class="plan-name">Reporting Dashboard Automation</div>
-        <div class="plan-desc">Add-on module</div>
-        <div class="plan-price">₹6,999 <span>setup + ₹1,500/mo</span></div>
-        <ul class="plan-list">
-          <li>Daily or weekly performance summary</li>
-          <li>Sent automatically to owner's phone/email</li>
-          <li>Custom metrics on request</li>
-        </ul>
-        <a class="btn btn-outline" href="https://wa.me/918950809500?text=Hi%20VANTYX%2C%20I%27m%20interested%20in%20the%20Reporting%20Dashboard%20Automation%20add-on.%20Can%20you%20share%20more%20details%3F">Add This</a>
-      </div>
-    </div>
+  // Simple keyword-matched knowledge base — answers instantly, no server needed
+  const kb = [
+    { keys: ['service','what do you do','offer'],
+      reply: "We install a 24/7 WhatsApp Automation Engine for Dental Clinics, Hospitality (cafes/restaurants/hotels), and Real Estate — it recovers missed calls and after-hours inquiries automatically. Web Development and Short-Form Video are optional add-ons that feed leads into the engine." },
+    { keys: ['price','pricing','cost','how much'],
+      reply: "Pricing depends on your industry and volume — check the Plans section above for tiered pricing by business type, or message us on WhatsApp and we'll quote a low-friction pilot to get you live risk-free." },
+    { keys: ['cafe','restaurant','coffee','hotel'],
+      reply: "For cafes, restaurants & hotels — automated reservation confirmations, after-hours booking recovery, and daily owner reports. See the 'Cafes & Restaurants' or 'Hotels' filter under Plans for tiered pricing." },
+    { keys: ['dental', 'clinic', 'doctor', 'hospital'],
+      reply: "For dental clinics, clinics & hospitals — 24/7 missed-call recovery, automated appointment confirmations, and daily patient reports. See the Plans section for tiered pricing by patient volume." },
+    { keys: ['real estate', 'property', 'site visit', 'buyer'],
+      reply: "For real estate — automated site-visit scheduling, property inquiry confirmations, and AI-qualified buyer/renter routing. See the Plans section for tiered pricing by lead volume." },
+    { keys: ['portfolio','work','example','demo'],
+      reply: "You can see our live demo sites in the Portfolio section further up this page — including a dental clinic demo." },
+    { keys: ['automation', 'whatsapp', 'n8n', 'workflow'],
+      reply: "Our WhatsApp Automation Engine is the core of what we do — it responds in under 30 seconds, qualifies the lead, and books the appointment/table/site-visit automatically, 24/7. Which business type are you asking about?" },
+    { keys: ['contact','human','talk','call','whatsapp me','number'],
+      reply: "Sure — tap below and I'll open WhatsApp so you can chat directly with our team." },
+    { keys: ['hi','hello','hey'],
+      reply: "Hey there! 👋 Ask me about pricing, or a specific industry — dental & clinics, cafes & hotels, or real estate." }
+  ];
 
-    <p style="margin-top:32px; font-size:13.5px; color:var(--text-faint);">Full-funnel builds (WhatsApp engine + website + content) are quoted individually based on scope — <a href="https://wa.me/918950809500" style="color:var(--gold); text-decoration:underline;">message us for a custom quote</a>.</p>
-  </div>
-</section>
+  function findReply(msg){
+    const lower = msg.toLowerCase();
+    for(const item of kb){
+      if(item.keys.some(k => lower.includes(k))) return item.reply;
+    }
+    return null;
+  }
 
-<section id="portfolio">
-  <div class="wrap">
-    <div class="eyebrow">Our Work</div>
-    <h2 class="section-title">Built by <em>VANTYX</em></h2>
-    <p style="color:var(--text-dim); margin-top:14px;">Real projects. Real systems in production.</p>
-    <div class="port-list">
-      <a class="port-row" href="https://aria-live.netlify.app" target="_blank" rel="noopener">
-        <span class="port-row-name">Smile Clinic — Dental Demo</span>
-        <span class="port-row-link">Visit Site →</span>
-      </a>
-      <a class="port-row" href="#contact">
-        <span class="port-row-name">Kulture Art</span>
-        <span class="port-row-link">In Progress →</span>
-      </a>
-    </div>
-  </div>
-</section>
+  function handleUserMessage(msg){
+    addMsg(msg, 'user');
+    const reply = findReply(msg);
+    setTimeout(() => {
+      if(reply){
+        addMsg(reply, 'bot');
+        if(reply.includes('WhatsApp') && reply.includes('tap below')){
+          addMsg(`<a href="${waLink('Hi VANTYX, I need help — can we chat?')}" style="color:var(--gold-bright); font-weight:600;" target="_blank">Open WhatsApp Chat →</a>`, 'bot');
+        }
+      } else {
+        addMsg(`I want to make sure you get the right answer — let's continue this on WhatsApp with our team directly.`, 'bot');
+        addMsg(`<a href="${waLink('Hi VANTYX, I have a question: ' + msg)}" style="color:var(--gold-bright); font-weight:600;" target="_blank">Open WhatsApp Chat →</a>`, 'bot');
+      }
+    }, 450);
+  }
 
-<section id="team">
-  <div class="wrap">
-    <div class="eyebrow">The People</div>
-    <h2 class="section-title">Meet the <em>Team</em></h2>
-    <p style="color:var(--text-dim); margin-top:14px;">Two specialists. One mission — your growth.</p>
-    <div class="team-grid">
-      <div class="team-card">
-        <div class="avatar">A</div>
-        <h3>Ayush</h3>
-        <div class="team-role">Founder & Chairman</div>
-        <div class="team-skills">Web Dev · AI Automation · Figma · Client Strategy · Business Development</div>
-      </div>
-      <div class="team-card">
-        <div class="avatar">A</div>
-        <h3>Aadi</h3>
-        <div class="team-role">Co-Founder & CEO</div>
-        <div class="team-skills">Video Editing · Reels & Shorts · Ad Creatives · Content Strategy</div>
-      </div>
-    </div>
-  </div>
-</section>
+  sendBtn.addEventListener('click', () => {
+    const val = input.value.trim();
+    if(!val) return;
+    handleUserMessage(val);
+    input.value = '';
+  });
+  input.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter'){
+      const val = input.value.trim();
+      if(!val) return;
+      handleUserMessage(val);
+      input.value = '';
+    }
+  });
 
-<section>
-  <div class="wrap">
-    <div class="eyebrow">What Clients Say</div>
-    <h2 class="section-title">Words That <em>Matter</em></h2>
-    <div class="test-grid">
-      <div class="test-card">
-        <p>"The demo they showed was exactly what our clinic needed. Impressive work from a young team that clearly knows digital inside out."</p>
-        <div class="test-who"><strong>Sharma Dental</strong><br>Dental Clinic — Sonipat</div>
-      </div>
-      <div class="test-card">
-        <p>"VANTYX built our online presence from scratch. Professional, fast, and they actually understand what a business needs to grow."</p>
-        <div class="test-who"><strong>Kulture Art</strong><br>Art Brand — Founding Client</div>
-      </div>
-      <div class="test-card">
-        <p>"Young team with serious skills. They know digital better than agencies charging five times the price."</p>
-        <div class="test-who"><strong>Debate Club</strong><br>Organisation — Client</div>
-      </div>
-    </div>
-  </div>
-</section>
+  quickWrap.addEventListener('click', (e) => {
+    if(e.target.tagName !== 'BUTTON') return;
+    const q = e.target.dataset.q;
+    const labels = { services:'What services do you offer?', pricing:'What are your prices?', realestate:'Tell me about real estate automation', cafe:'Tell me about cafe automation', contact:'I want to talk to a human' };
+    handleUserMessage(labels[q] || q);
+  });
+})();
 
-<section id="faq">
-  <div class="wrap">
-    <div class="eyebrow">FAQ</div>
-    <h2 class="section-title" style="margin-bottom:20px;">Common <em>Questions</em></h2>
+// ============================================================
+// LIGHTWEIGHT MOTION LAYER — zero dependencies, respects prefers-reduced-motion.
+// Header scroll shadow + IntersectionObserver-based scroll reveals.
+// ============================================================
+(function(){
+  // Sticky header shadow once the page scrolls
+  const headerEl = document.querySelector('header');
+  if (headerEl){
+    const toggleHeaderShadow = () => headerEl.classList.toggle('is-scrolled', window.scrollY > 8);
+    toggleHeaderShadow();
+    window.addEventListener('scroll', toggleHeaderShadow, { passive: true });
+  }
 
-    <div id="faqContainer">
-      <!-- Rendered from content/site-content.json by script.js — edit via /admin, not here. -->
-    </div>
-  </div>
-</section>
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion || typeof IntersectionObserver === 'undefined') return;
 
-<section id="contact">
-  <div class="wrap">
-    <div class="eyebrow">Let's Talk</div>
-    <h2 class="section-title">Start Your <em>Project Today</em></h2>
-    <div class="contact-grid">
-      <div>
-        <div class="contact-row">
-          <div class="contact-icon">📱</div>
-          <div><h4>WhatsApp</h4><a href="https://wa.me/918950809500">+91 89508 09500</a></div>
-        </div>
-        <div class="contact-row">
-          <div class="contact-icon">✉️</div>
-          <div><h4>Email</h4><a href="mailto:vantyxstudio26@gmail.com">vantyxstudio26@gmail.com</a></div>
-        </div>
-        <div class="contact-row">
-          <div class="contact-icon">📸</div>
-          <div><h4>Instagram</h4><a href="https://instagram.com/vantyx.studios" target="_blank" rel="noopener">@vantyx.studios</a></div>
-        </div>
-        <div class="contact-row">
-          <div class="contact-icon">📍</div>
-          <div><h4>Location</h4>Sonipat, Haryana, India</div>
-        </div>
-        <a class="btn btn-gold" href="https://wa.me/918950809500">Message on WhatsApp →</a>
-      </div>
-      <form id="contactForm">
-        <label class="sr-only" for="cf-name">Your Name</label>
-        <input type="text" id="cf-name" name="name" placeholder="Your Name" required>
-        <label class="sr-only" for="cf-business">Business Name</label>
-        <input type="text" id="cf-business" name="business" placeholder="Business Name">
-        <label class="sr-only" for="cf-contact">Phone / Email</label>
-        <input type="text" id="cf-contact" name="contact" placeholder="Phone / Email" required>
-        <label class="sr-only" for="cf-need">What do you need?</label>
-        <textarea id="cf-need" name="need" placeholder="What do you need?"></textarea>
-        <button class="btn btn-gold" type="submit" style="border:none; cursor:pointer;">Send Message →</button>
-      </form>
-    </div>
-  </div>
-</section>
+  // Groups of elements that fade/slide up as they enter the viewport, staggered within each group.
+  // Runs on a short delay so the CMS-driven pricing/FAQ content (loaded via fetch) has time to render first.
+  function initReveal(){
+    const revealGroups = [
+      '.service-grid .service-card',
+      '.niche-grid .niche-pill',
+      '.proof-grid .proof-card',
+      '#plans .plan-card',
+      '.port-list .port-row',
+      '.team-grid .team-card',
+      '.test-grid .test-card',
+      '#faq details'
+    ];
 
-</main>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
-<footer>
-  <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <div class="logo" style="margin-bottom:14px;">VANTYX</div>
-        <p style="color:var(--text-dim); font-size:14px; max-width:340px;">A 24/7 WhatsApp automation engine for Dental Clinics, Hospitality, and Real Estate — built to recover missed leads before they go to a competitor.</p>
-      </div>
-      <div>
-        <h4>Services</h4>
-        <ul>
-          <li><a href="#services">WhatsApp Automation Engine</a></li>
-          <li><a href="#services">Missed-Call Lead Recovery</a></li>
-          <li><a href="#services">Automated Booking &amp; Scheduling</a></li>
-          <li><a href="#services">Web Development</a></li>
-          <li><a href="#services">Short-Form Video &amp; Content</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Company</h4>
-        <ul>
-          <li><a href="#team">Team</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#plans">Pricing</a></li>
-          <li><a href="#faq">FAQ</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="foot-bottom">
-      <div>© 2026 VANTYX Studio. All rights reserved. Sonipat, India.</div>
-      <div style="display:flex; gap:16px;">
-        <a href="https://instagram.com/vantyx.studios" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://wa.me/918950809500">WhatsApp</a>
-        <a href="mailto:vantyxstudio26@gmail.com">Email</a>
-      </div>
-    </div>
-  </div>
-</footer>
+    revealGroups.forEach(selector => {
+      document.querySelectorAll(selector).forEach((el, i) => {
+        if (el.classList.contains('reveal')) return; // already observed
+        el.classList.add('reveal');
+        el.style.transitionDelay = Math.min(i * 60, 300) + 'ms';
+        observer.observe(el);
+      });
+    });
+  }
 
-<!-- CHATBOT WIDGET -->
-<button id="vantyx-chat-toggle" aria-label="Chat with VANTYX" aria-expanded="false" aria-controls="vantyx-chat-window">💬</button>
-<div id="vantyx-chat-window" role="dialog" aria-label="VANTYX Assistant chat" aria-hidden="true">
-  <div class="chat-header">
-    <div>
-      <h4>VANTYX Assistant</h4>
-      <p>● Online — usually replies instantly</p>
-    </div>
-    <button class="chat-close" id="vantyx-chat-close" aria-label="Close chat">×</button>
-  </div>
-  <div class="chat-body" id="vantyx-chat-body" aria-live="polite">
-    <div class="chat-msg bot">Hey! 👋 I'm the VANTYX assistant. Ask me about our services, pricing, or automation packages for your business — or tap a quick option below.</div>
-  </div>
-  <div class="chat-quick" id="vantyx-chat-quick">
-    <button data-q="services">Our Services</button>
-    <button data-q="pricing">Pricing</button>
-    <button data-q="realestate">Real Estate Automation</button>
-    <button data-q="cafe">Cafe Automation</button>
-    <button data-q="contact">Talk to a Human</button>
-  </div>
-  <div class="chat-input-row">
-    <label class="sr-only" for="vantyx-chat-input">Type your question</label>
-    <input type="text" id="vantyx-chat-input" placeholder="Type your question...">
-    <button id="vantyx-chat-send">Send</button>
-  </div>
-</div>
-
-<script src="script.js"></script>
-
-</body>
-</html>
+  initReveal();
+  // Re-run shortly after load to catch the pricing/FAQ cards once the content fetch resolves.
+  setTimeout(initReveal, 500);
+})();
