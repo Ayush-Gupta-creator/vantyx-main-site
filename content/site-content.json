@@ -1,0 +1,72 @@
+{
+  "faq": [
+    { "question": "Will this replace my receptionist / front desk?", "answer": "No — it covers the moments your front desk can't: after hours, during rush, and the 30+ minutes it takes to call back a missed inquiry. Your team still runs the desk; the WhatsApp engine just makes sure nothing falls through the cracks before they can get to it." },
+    { "question": "How fast does setup take?", "answer": "Under 24 hours. We connect your phone line, website, or Instagram page, configure the booking flow for your business, and it's live — no waiting weeks for a build." },
+    { "question": "What if a patient or customer asks a complex question?", "answer": "The assistant handles the standard 80% — hours, availability, pricing ranges, booking — instantly. Anything it can't answer gets flagged and routed straight to your team on WhatsApp, so no inquiry is ever left hanging." },
+    { "question": "Why is the pilot price so low?", "answer": "Because we'd rather prove it works with real bookings than sell you on a promise. Setup and monthly cost depend on your industry and volume — message us on WhatsApp and we'll quote a low-friction pilot to get you live risk-free." },
+    { "question": "How does payment work?", "answer": "A one-time setup fee plus a monthly fee, paid via UPI — the exact amount depends on your industry and volume tier. Message us on WhatsApp for your quote. No long-term lock-in required." },
+    { "question": "Do you work outside Sonipat?", "answer": "Absolutely. We work with businesses across Haryana — Panipat, Karnal, Ambala, Faridabad, Gurugram — and beyond. Everything is handled online and set up remotely." }
+  ],
+  "pricing": {
+    "dental": {
+      "label": "Dental Clinics",
+      "unit": "patients/month",
+      "tiers": [100, 300, 600],
+      "prices": ["₹1,000", "₹8,999", "₹14,999+"],
+      "subs": ["setup + ₹2,000/mo", "setup + ₹2,800/mo", "setup + ₹4,000+/mo"],
+      "features": [
+        "24/7 WhatsApp Auto-Responder\nMissed-Call Lead Recovery\nAutomated appointment confirmations\nGoogle Sheets logging\nDaily owner summary report",
+        "Everything in Pilot\nRecall reminders for check-ups/cleanings\nTreatment follow-up sequences\nAI-qualified inquiry routing\nPriority monthly maintenance",
+        "Everything in Growth\nMulti-branch scheduling support\nCustom reporting dashboard\nPriced individually above 600/mo"
+      ]
+    },
+    "clinics": {
+      "label": "Clinics & Hospitals",
+      "unit": "patients/month",
+      "tiers": [100, 300, 600],
+      "prices": ["₹1,000", "₹8,999", "₹14,999+"],
+      "subs": ["setup + ₹2,000/mo", "setup + ₹2,800/mo", "setup + ₹4,000+/mo"],
+      "features": [
+        "24/7 WhatsApp Auto-Responder\nMissed-Call Lead Recovery\nAutomated appointment confirmations\nGoogle Sheets logging\nDaily owner summary report",
+        "Everything in Pilot\nPrescription/refill reminders\nFollow-up visit sequences\nAI-qualified inquiry routing\nPriority monthly maintenance",
+        "Everything in Growth\nMulti-doctor scheduling support\nCustom reporting dashboard\nPriced individually above 600/mo"
+      ]
+    },
+    "cafe": {
+      "label": "Cafes & Restaurants",
+      "unit": "orders/inquiries per month",
+      "tiers": [500, 1500, 3000],
+      "prices": ["₹1,000", "₹9,999", "₹15,999+"],
+      "subs": ["setup + ₹2,000/mo", "setup + ₹3,000/mo", "setup + ₹4,500+/mo"],
+      "features": [
+        "24/7 WhatsApp Auto-Responder\nAutomated order/booking confirmations\nWhatsApp reservation reminders\nGoogle Sheets logging\nDaily owner summary report",
+        "Everything in Pilot\nPost-visit review requests\nAI-qualified inquiry routing\nPriority monthly maintenance",
+        "Everything in Growth\nMulti-outlet order routing\nCustom reporting dashboard\nPriced individually above 3,000/mo"
+      ]
+    },
+    "hotels": {
+      "label": "Hotels",
+      "unit": "bookings/month",
+      "tiers": [100, 300, 600],
+      "prices": ["₹1,000", "₹11,999", "₹18,999+"],
+      "subs": ["setup + ₹2,000/mo", "setup + ₹3,800/mo", "setup + ₹5,500+/mo"],
+      "features": [
+        "24/7 WhatsApp Auto-Responder\nAutomated booking confirmations\nMissed-Call Lead Recovery\nGoogle Sheets logging\nDaily owner summary report",
+        "Everything in Pilot\nCheck-in/checkout reminders\nPost-stay review requests\nAI-qualified inquiry routing\nPriority monthly maintenance",
+        "Everything in Growth\nChannel-partner booking sync\nCustom reporting dashboard\nPriced individually above 600/mo"
+      ]
+    },
+    "realestate": {
+      "label": "Real Estate",
+      "unit": "leads/month",
+      "tiers": [100, 300, 600],
+      "prices": ["₹1,000", "₹9,999", "₹16,999+"],
+      "subs": ["setup + ₹2,000/mo", "setup + ₹3,200/mo", "setup + ₹4,800+/mo"],
+      "features": [
+        "24/7 WhatsApp Auto-Responder\nAutomated site-visit scheduling\nProperty inquiry confirmations\nGoogle Sheets logging\nDaily owner summary report",
+        "Everything in Pilot\nAI-qualified buyer/renter routing\nFollow-up nurture sequences\nPriority monthly maintenance",
+        "Everything in Growth\nMulti-project inquiry segmentation\nCustom reporting dashboard\nPriced individually above 600/mo"
+      ]
+    }
+  }
+}
