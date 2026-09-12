@@ -64,14 +64,24 @@
     {"@type": "Question", "name": "Will this replace my receptionist / front desk?", "acceptedAnswer": {"@type": "Answer", "text": "No — it covers the moments your front desk can't: after hours, during rush, and the 30+ minutes it takes to call back a missed inquiry. Your team still runs the desk; the WhatsApp engine just makes sure nothing falls through the cracks before they can get to it."}},
     {"@type": "Question", "name": "How fast does setup take?", "acceptedAnswer": {"@type": "Answer", "text": "Under 24 hours. We connect your phone line, website, or Instagram page, configure the booking flow for your business, and it's live — no waiting weeks for a build."}},
     {"@type": "Question", "name": "What if a patient or customer asks a complex question?", "acceptedAnswer": {"@type": "Answer", "text": "The assistant handles the standard 80% — hours, availability, pricing ranges, booking — instantly. Anything it can't answer gets flagged and routed straight to your team on WhatsApp, so no inquiry is ever left hanging."}},
-    {"@type": "Question", "name": "Why is the pilot price so low?", "acceptedAnswer": {"@type": "Answer", "text": "Because we'd rather prove it works with real bookings than sell you on a promise. ₹1,000 setup and ₹2,000/month covers our cost to get you live — if it doesn't log real bookings in 30 days, you pay ₹0 and walk away."}},
-    {"@type": "Question", "name": "How does payment work?", "acceptedAnswer": {"@type": "Answer", "text": "₹1,000 setup to get started, ₹2,000/month from there — via UPI. Simple and transparent, with no long-term lock-in required."}},
+    {"@type": "Question", "name": "Why is the pilot price so low?", "acceptedAnswer": {"@type": "Answer", "text": "Because we'd rather prove it works with real bookings than sell you on a promise. Setup and monthly cost depend on your industry and volume — message us on WhatsApp and we'll quote a low-friction pilot to get you live risk-free."}},
+    {"@type": "Question", "name": "How does payment work?", "acceptedAnswer": {"@type": "Answer", "text": "A one-time setup fee plus a monthly fee, paid via UPI — the exact amount depends on your industry and volume tier. Message us on WhatsApp for your quote. No long-term lock-in required."}},
     {"@type": "Question", "name": "Do you work outside Sonipat?", "acceptedAnswer": {"@type": "Answer", "text": "Absolutely. We work with businesses across Haryana — Panipat, Karnal, Ambala, Faridabad, Gurugram — and beyond. Everything is handled online and set up remotely."}}
   ]
 }
 </script>
 
 <link rel="stylesheet" href="style.css">
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", (user) => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; });
+      }
+    });
+  }
+</script>
 </head>
 <body>
 
@@ -108,7 +118,7 @@
     <p class="hero-desc">We install a 24/7 WhatsApp engine for Dental Clinics, Hospitality, and Real Estate that automatically responds to missed calls and late-night inquiries — locking in appointments before they go to a competitor.</p>
     <div class="hero-cta">
       <a class="btn btn-gold" href="https://wa.me/918950809500?text=Hi%20VANTYX%2C%20I%27d%20like%20to%20claim%20the%2014-Day%20Zero-Risk%20Pilot%20(%E2%82%B91k%20Setup).">Claim 14-Day Zero-Risk Pilot (₹1k Setup)</a>
-      <a class="btn btn-outline" href="https://smile-clinic-dental.netlify.app" target="_blank" rel="noopener">See Live Dental Demo →</a>
+      <a class="btn btn-outline" href="https://aria-live.netlify.app" target="_blank" rel="noopener">See Live Dental Demo →</a>
     </div>
     <div class="stats">
       <div><div class="stat-num">30 sec</div><div class="stat-label">Avg. Response Time</div></div>
@@ -211,28 +221,7 @@
     <h2 class="section-title">The 14-Day <em>Risk-Free Pilot</em></h2>
     <p class="plans-sub">Remove all the friction. See real bookings land before you commit to anything more.</p>
 
-    <div class="plan-card pilot-card" style="margin-top:44px;">
-      <div>
-        <div class="plan-badge" style="position:static; display:inline-block; margin-bottom:14px;">Our DM Outreach Offer</div>
-        <div class="plan-name" style="font-size:28px;">14-Day Risk-Free Pilot</div>
-        <p style="color:var(--text-dim); font-size:14.5px; margin-top:10px; max-width:420px;">Everything you need to stop losing leads to slower competitors — live in under 24 hours.</p>
-        <div class="pilot-guarantee">If it doesn't log real bookings in <strong>30 days</strong>, you pay <strong>₹0</strong>.</div>
-      </div>
-      <div>
-        <div class="pilot-price-big">₹1,000 <span>setup</span></div>
-        <div class="pilot-price-big" style="font-size:26px; margin-top:0;">+ ₹2,000<span>/month</span></div>
-        <ul class="plan-list" style="margin-top:18px;">
-          <li>24/7 WhatsApp Auto-Responder</li>
-          <li>Missed-Call Lead Recovery</li>
-          <li>Automated Booking Flow</li>
-          <li>Google Sheets Lead Logging</li>
-          <li>Daily Owner Summary Reports</li>
-        </ul>
-        <a class="btn btn-gold" style="width:100%; text-align:center; margin-top:6px;" href="https://wa.me/918950809500?text=Hi%20VANTYX%2C%20I%27d%20like%20to%20claim%20the%2014-Day%20Zero-Risk%20Pilot%20(%E2%82%B91k%20Setup).">Claim 14-Day Zero-Risk Pilot (₹1k Setup)</a>
-      </div>
-    </div>
-
-    <div class="plan-group-label" style="margin-top:64px;">Tiered Pricing By Industry <span style="color:var(--text-faint); text-transform:none; letter-spacing:0;">(for higher volume, pick your ladder)</span></div>
+    <div class="plan-group-label" style="margin-top:44px;">Tiered Pricing By Industry <span style="color:var(--text-faint); text-transform:none; letter-spacing:0;">(for higher volume, pick your ladder)</span></div>
     <p style="color:var(--text-dim); font-size:14px; max-width:640px; margin-bottom:24px;">Every vertical starts at Pilot pricing — packages scale only as your inquiry volume grows.</p>
 
     <div class="automation-filter">
@@ -336,7 +325,7 @@
     <h2 class="section-title">Built by <em>VANTYX</em></h2>
     <p style="color:var(--text-dim); margin-top:14px;">Real projects. Real systems in production.</p>
     <div class="port-list">
-      <a class="port-row" href="https://smile-clinic-dental.netlify.app" target="_blank" rel="noopener">
+      <a class="port-row" href="https://aria-live.netlify.app" target="_blank" rel="noopener">
         <span class="port-row-name">Smile Clinic — Dental Demo</span>
         <span class="port-row-link">Visit Site →</span>
       </a>
@@ -396,30 +385,9 @@
     <div class="eyebrow">FAQ</div>
     <h2 class="section-title" style="margin-bottom:20px;">Common <em>Questions</em></h2>
 
-    <details>
-      <summary>Will this replace my receptionist / front desk? <span>+</span></summary>
-      <p>No — it covers the moments your front desk can't: after hours, during rush, and the 30+ minutes it takes to call back a missed inquiry. Your team still runs the desk; the WhatsApp engine just makes sure nothing falls through the cracks before they can get to it.</p>
-    </details>
-    <details>
-      <summary>How fast does setup take? <span>+</span></summary>
-      <p>Under 24 hours. We connect your phone line, website, or Instagram page, configure the booking flow for your business, and it's live — no waiting weeks for a build.</p>
-    </details>
-    <details>
-      <summary>What if a patient or customer asks a complex question? <span>+</span></summary>
-      <p>The assistant handles the standard 80% — hours, availability, pricing ranges, booking — instantly. Anything it can't answer gets flagged and routed straight to your team on WhatsApp, so no inquiry is ever left hanging.</p>
-    </details>
-    <details>
-      <summary>Why is the pilot price so low? <span>+</span></summary>
-      <p>Because we'd rather prove it works with real bookings than sell you on a promise. ₹1,000 setup and ₹2,000/month covers our cost to get you live — if it doesn't log real bookings in 30 days, you pay ₹0 and walk away.</p>
-    </details>
-    <details>
-      <summary>How does payment work? <span>+</span></summary>
-      <p>₹1,000 setup to get started, ₹2,000/month from there — via UPI. Simple and transparent, with no long-term lock-in required.</p>
-    </details>
-    <details>
-      <summary>Do you work outside Sonipat? <span>+</span></summary>
-      <p>Absolutely. We work with businesses across Haryana — Panipat, Karnal, Ambala, Faridabad, Gurugram — and beyond. Everything is handled online and set up remotely.</p>
-    </details>
+    <div id="faqContainer">
+      <!-- Rendered from content/site-content.json by script.js — edit via /admin, not here. -->
+    </div>
   </div>
 </section>
 
