@@ -1,0 +1,69 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Real authentication — handled by Netlify Identity, not by this file or any JavaScript on the site.
+# Nothing here stores or checks a password. See NETLIFY-CMS-SETUP.md for enabling it.
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "content"
+    label: "Site Content"
+    files:
+      - name: "site"
+        label: "Pricing & FAQ"
+        file: "content/site-content.json"
+        fields:
+          - label: "FAQ"
+            name: "faq"
+            widget: "list"
+            summary: "{{fields.question}}"
+            fields:
+              - { label: "Question", name: "question", widget: "string" }
+              - { label: "Answer", name: "answer", widget: "text" }
+
+          - label: "Pricing"
+            name: "pricing"
+            widget: "object"
+            fields:
+              - &vertical_fields
+                label: "Dental Clinics"
+                name: "dental"
+                widget: "object"
+                fields: &tier_fields
+                  - { label: "Display Name", name: "label", widget: "string" }
+                  - { label: "Volume unit (e.g. patients/month)", name: "unit", widget: "string" }
+                  - label: "Volume per tier (Pilot, Growth, Scale)"
+                    name: "tiers"
+                    widget: "list"
+                    field: { label: "Volume", name: "value", widget: "number" }
+                  - label: "Price per tier (Pilot, Growth, Scale)"
+                    name: "prices"
+                    widget: "list"
+                    field: { label: "Price", name: "value", widget: "string" }
+                  - label: "Price subtext per tier"
+                    name: "subs"
+                    widget: "list"
+                    field: { label: "Subtext", name: "value", widget: "string" }
+                  - label: "Features per tier — one feature per line, in order Pilot/Growth/Scale"
+                    name: "features"
+                    widget: "list"
+                    field: { label: "Feature list (one per line)", name: "value", widget: "text" }
+              - <<: *vertical_fields
+                label: "Clinics & Hospitals"
+                name: "clinics"
+                fields: *tier_fields
+              - <<: *vertical_fields
+                label: "Cafes & Restaurants"
+                name: "cafe"
+                fields: *tier_fields
+              - <<: *vertical_fields
+                label: "Hotels"
+                name: "hotels"
+                fields: *tier_fields
+              - <<: *vertical_fields
+                label: "Real Estate"
+                name: "realestate"
+                fields: *tier_fields
