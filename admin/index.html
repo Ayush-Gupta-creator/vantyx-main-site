@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VANTYX — Admin</title>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<style>
+  :root{
+    --bg:#0b0b0d; --bg-raised:#131316; --bg-card:#17171b; --line:#26262b;
+    --text:#f4f3ef; --text-dim:#a8a7a2; --text-faint:#8f8d88;
+    --gold:#d4af5a; --gold-bright:#e8c874; --danger:#c0574f; --success:#6fae7c;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--bg); color:var(--text); font-family:-apple-system,'Inter',sans-serif; -webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Georgia',serif; font-weight:700; letter-spacing:-0.01em;}
+  em{font-style:italic; color:var(--gold-bright);}
+  a{color:var(--gold); text-decoration:none;}
+  input,textarea,select{
+    background:var(--bg); border:1px solid var(--line); color:var(--text);
+    padding:10px 12px; font-size:14px; font-family:inherit; border-radius:4px; width:100%;
+  }
+  input:focus,textarea:focus,select:focus{outline:none; border-color:var(--gold);}
+  textarea{resize:vertical; min-height:70px;}
+  label{display:block; font-size:12px; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-faint); margin-bottom:6px; margin-top:14px;}
+  button{font-family:inherit; cursor:pointer;}
+  .btn{padding:11px 22px; border-radius:4px; font-size:14px; font-weight:600; border:none; transition:all .2s ease;}
+  .btn-gold{background:var(--gold); color:#161512;}
+  .btn-gold:hover{background:var(--gold-bright);}
+  .btn-outline{background:transparent; border:1px solid var(--line); color:var(--text);}
+  .btn-outline:hover{border-color:var(--gold);}
+  .btn-danger{background:transparent; border:1px solid var(--danger); color:var(--danger); padding:6px 12px; font-size:12px;}
+
+  /* LOGIN SCREEN */
+  #loginScreen{
+    min-height:100vh; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:18px;
+    background:radial-gradient(circle at 50% 20%, #1c1810, var(--bg) 60%);
+  }
+  #loginScreen .logo{font-size:32px; letter-spacing:0.04em;}
+  #loginScreen p{color:var(--text-dim); font-size:14px; max-width:340px; text-align:center;}
+
+  /* DASHBOARD SHELL */
+  #dashboard{display:none;}
+  header.admin-header{
+    position:sticky; top:0; z-index:20; background:rgba(11,11,13,0.92); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line); padding:16px 28px; display:flex; align-items:center; justify-content:space-between;
+  }
+  header.admin-header .logo{font-size:20px; letter-spacing:0.04em;}
+  .header-right{display:flex; align-items:center; gap:16px; font-size:13px; color:var(--text-dim);}
+  .layout{display:flex; min-height:calc(100vh - 65px);}
+  nav.tabs{width:220px; border-right:1px solid var(--line); padding:24px 0; flex-shrink:0;}
+  nav.tabs button{
+    display:block; width:100%; text-align:left; background:none; border:none; color:var(--text-dim);
+    padding:13px 26px; font-size:14px; border-left:2px solid transparent;
+  }
+  nav.tabs button:hover{color:var(--text); background:var(--bg-raised);}
+  nav.tabs button.active{color:var(--gold-bright); border-left-color:var(--gold); background:var(--bg-raised); font-weight:600;}
+  main.panelWrap{flex:1; padding:36px 44px; max-width:900px;}
+  .panel{display:none;}
+  .panel.active{display:block;}
+  .panel h2{font-size:24px; margin-bottom:6px;}
+  .panel .hint{color:var(--text-faint); font-size:13px; margin-bottom:28px;}
+
+  .card{background:var(--bg-card); border:1px solid var(--line); border-radius:8px; padding:24px; margin-bottom:20px;}
+  .card-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;}
+  .card-head h3{font-size:16px; font-family:inherit; font-weight:600;}
+
+  .avatar-preview{width:56px; height:56px; border-radius:50%; object-fit:cover; background:var(--gold); display:flex; align-items:center; justify-content:center; color:#161512; font-family:'Georgia',serif; font-weight:700; font-size:20px;}
+  .photo-row{display:flex; align-items:center; gap:16px; margin-top:10px;}
+
+  #saveBar{
+    position:sticky; bottom:0; background:var(--bg-raised); border-top:1px solid var(--line);
+    padding:16px 44px; display:flex; align-items:center; gap:16px; justify-content:flex-end;
+  }
+  #saveStatus{font-size:13px; color:var(--text-dim);}
+  #saveStatus.ok{color:var(--success);}
+  #saveStatus.err{color:var(--danger);}
+
+  .row-actions{display:flex; justify-content:flex-end; margin-top:10px;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media(max-width:700px){ .grid2{grid-template-columns:1fr;} .layout{flex-direction:column;} nav.tabs{width:100%; display:flex; overflow-x:auto; padding:10px;} nav.tabs button{border-left:none; border-bottom:2px solid transparent; white-space:nowrap;} nav.tabs button.active{border-bottom-color:var(--gold);} main.panelWrap{padding:24px;} }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="logo">VANTYX</div>
+  <p>Admin dashboard. Log in with your team account to edit pricing, FAQ, hero copy, testimonials, and team info — changes publish straight to the live site.</p>
+  <button class="btn btn-gold" onclick="netlifyIdentity.open('login')">Log In</button>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <header class="admin-header">
+    <div class="logo">VANTYX <span style="color:var(--text-faint); font-size:14px; font-family:-apple-system,sans-serif; font-weight:400;">Admin</span></div>
+    <div class="header-right">
+      <span id="userEmail"></span>
+      <button class="btn btn-outline" style="padding:7px 14px; font-size:12px;" onclick="netlifyIdentity.logout()">Log Out</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="hero">Hero</button>
+      <button class="tab-btn" data-tab="pricing">Pricing</button>
+      <button class="tab-btn" data-tab="faq">FAQ</button>
+      <button class="tab-btn" data-tab="testimonials">Testimonials</button>
+      <button class="tab-btn" data-tab="team">Team</button>
+      <button class="tab-btn" data-tab="contact">Contact</button>
+    </nav>
+
+    <main class="panelWrap">
+
+      <!-- HERO -->
+      <section class="panel active" id="panel-hero">
+        <h2>Hero Section</h2>
+        <p class="hint">The top of your homepage — the first thing visitors read.</p>
+        <div class="card">
+          <label>Eyebrow tag</label>
+          <input id="hero_tag">
+          <label>Headline — normal part</label>
+          <input id="hero_title_prefix">
+          <label>Headline — emphasized part (shown in italic gold)</label>
+          <input id="hero_title_emphasis">
+          <label>Subheadline</label>
+          <input id="hero_sub">
+          <label>Description paragraph</label>
+          <textarea id="hero_desc"></textarea>
+        </div>
+      </section>
+
+      <!-- PRICING -->
+      <section class="panel" id="panel-pricing">
+        <h2>Pricing</h2>
+        <p class="hint">Edit each vertical's Pilot / Growth / Scale tiers. Features: one per line.</p>
+        <div id="pricingContainer"></div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="panel" id="panel-faq">
+        <h2>FAQ</h2>
+        <p class="hint">Add, edit, or remove questions shown on the site.</p>
+        <div id="faqContainer"></div>
+        <button class="btn btn-outline" onclick="addFaq()">+ Add Question</button>
+      </section>
+
+      <!-- TESTIMONIALS -->
+      <section class="panel" id="panel-testimonials">
+        <h2>Testimonials</h2>
+        <p class="hint">Client quotes shown on the site.</p>
+        <div id="testimonialsContainer"></div>
+        <button class="btn btn-outline" onclick="addTestimonial()">+ Add Testimonial</button>
+      </section>
+
+      <!-- TEAM -->
+      <section class="panel" id="panel-team">
+        <h2>Team</h2>
+        <p class="hint">Team member cards, including photos.</p>
+        <div id="teamContainer"></div>
+        <button class="btn btn-outline" onclick="addTeamMember()">+ Add Team Member</button>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="panel" id="panel-contact">
+        <h2>Contact Info</h2>
+        <p class="hint">Used throughout the site — WhatsApp buttons, footer, contact section.</p>
+        <div class="card">
+          <div class="grid2">
+            <div><label>WhatsApp display number</label><input id="contact_whatsapp_display"></div>
+            <div><label>WhatsApp number (digits only, with country code)</label><input id="contact_whatsapp_number"></div>
+            <div><label>Email</label><input id="contact_email"></div>
+            <div><label>Instagram handle</label><input id="contact_instagram_handle"></div>
+            <div><label>Instagram URL</label><input id="contact_instagram_url"></div>
+            <div><label>Location</label><input id="contact_location"></div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <div id="saveBar">
+    <span id="saveStatus"></span>
+    <button class="btn btn-gold" onclick="saveAll()">Save & Publish</button>
+  </div>
+</div>
+
+<script>
+let siteData = null;
+
+// ---------- Auth ----------
+netlifyIdentity.on('init', (user) => {
+  if (user) showDashboard(user);
+});
+netlifyIdentity.on('login', (user) => {
+  showDashboard(user);
+  netlifyIdentity.close();
+});
+netlifyIdentity.on('logout', () => {
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('dashboard').style.display = 'none';
+});
+netlifyIdentity.init();
+
+async function showDashboard(user){
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+  document.getElementById('userEmail').textContent = user.email;
+  await loadContent();
+}
+
+async function authHeader(){
+  const user = netlifyIdentity.currentUser();
+  const token = await user.jwt();
+  return { 'Authorization': 'Bearer ' + token };
+}
+
+// ---------- Tabs ----------
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+// ---------- Load ----------
+async function loadContent(){
+  const res = await fetch('/content/site-content.json?_=' + Date.now());
+  siteData = await res.json();
+
+  document.getElementById('hero_tag').value = siteData.hero.tag;
+  document.getElementById('hero_title_prefix').value = siteData.hero.title_prefix;
+  document.getElementById('hero_title_emphasis').value = siteData.hero.title_emphasis;
+  document.getElementById('hero_sub').value = siteData.hero.sub;
+  document.getElementById('hero_desc').value = siteData.hero.desc;
+
+  document.getElementById('contact_whatsapp_display').value = siteData.contact.whatsapp_display;
+  document.getElementById('contact_whatsapp_number').value = siteData.contact.whatsapp_number;
+  document.getElementById('contact_email').value = siteData.contact.email;
+  document.getElementById('contact_instagram_handle').value = siteData.contact.instagram_handle;
+  document.getElementById('contact_instagram_url').value = siteData.contact.instagram_url;
+  document.getElementById('contact_location').value = siteData.contact.location;
+
+  renderPricing();
+  renderFaq();
+  renderTestimonials();
+  renderTeam();
+}
+
+// ---------- Pricing ----------
+function renderPricing(){
+  const wrap = document.getElementById('pricingContainer');
+  wrap.innerHTML = '';
+  Object.keys(siteData.pricing).forEach(key => {
+    const v = siteData.pricing[key];
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-head"><h3>${v.label}</h3></div>
+      <label>Display label</label><input data-p="${key}.label" value="${escAttr(v.label)}">
+      <label>Volume unit</label><input data-p="${key}.unit" value="${escAttr(v.unit)}">
+      <div class="grid2" style="margin-top:14px;">
+        ${[0,1,2].map(i => `
+          <div style="border:1px solid var(--line); border-radius:6px; padding:14px;">
+            <strong style="font-size:13px; color:var(--gold-bright);">${['Pilot','Growth','Scale'][i]}</strong>
+            <label>Volume</label><input type="number" data-p="${key}.tiers.${i}" value="${v.tiers[i]}">
+            <label>Price</label><input data-p="${key}.prices.${i}" value="${escAttr(v.prices[i])}">
+            <label>Price subtext</label><input data-p="${key}.subs.${i}" value="${escAttr(v.subs[i])}">
+            <label>Features (one per line)</label><textarea data-p="${key}.features.${i}" style="min-height:110px;">${v.features[i]}</textarea>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    wrap.appendChild(card);
+  });
+  wrap.querySelectorAll('[data-p]').forEach(el => {
+    el.addEventListener('input', () => setPricingValue(el.dataset.p, el.value));
+  });
+}
+function setPricingValue(path, value){
+  const [vertical, field, idx] = path.split('.');
+  if (idx !== undefined){
+    siteData.pricing[vertical][field][idx] = field === 'tiers' ? Number(value) : value;
+  } else {
+    siteData.pricing[vertical][field] = value;
+  }
+}
+
+// ---------- FAQ ----------
+function renderFaq(){
+  const wrap = document.getElementById('faqContainer');
+  wrap.innerHTML = '';
+  siteData.faq.forEach((item, i) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-head"><h3>Question ${i+1}</h3><button class="btn-danger" onclick="removeFaq(${i})">Remove</button></div>
+      <label>Question</label><input data-f="${i}.question" value="${escAttr(item.question)}">
+      <label>Answer</label><textarea data-f="${i}.answer">${item.answer}</textarea>
+    `;
+    wrap.appendChild(card);
+  });
+  wrap.querySelectorAll('[data-f]').forEach(el => {
+    el.addEventListener('input', () => {
+      const [i, field] = el.dataset.f.split('.');
+      siteData.faq[i][field] = el.value;
+    });
+  });
+}
+function addFaq(){ siteData.faq.push({question:'New question', answer:'New answer'}); renderFaq(); }
+function removeFaq(i){ siteData.faq.splice(i,1); renderFaq(); }
+
+// ---------- Testimonials ----------
+function renderTestimonials(){
+  const wrap = document.getElementById('testimonialsContainer');
+  wrap.innerHTML = '';
+  siteData.testimonials.forEach((item, i) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-head"><h3>Testimonial ${i+1}</h3><button class="btn-danger" onclick="removeTestimonial(${i})">Remove</button></div>
+      <label>Quote</label><textarea data-t="${i}.quote">${item.quote}</textarea>
+      <div class="grid2">
+        <div><label>Client name</label><input data-t="${i}.name" value="${escAttr(item.name)}"></div>
+        <div><label>Role / business</label><input data-t="${i}.role" value="${escAttr(item.role)}"></div>
+      </div>
+    `;
+    wrap.appendChild(card);
+  });
+  wrap.querySelectorAll('[data-t]').forEach(el => {
+    el.addEventListener('input', () => {
+      const [i, field] = el.dataset.t.split('.');
+      siteData.testimonials[i][field] = el.value;
+    });
+  });
+}
+function addTestimonial(){ siteData.testimonials.push({quote:'', name:'', role:''}); renderTestimonials(); }
+function removeTestimonial(i){ siteData.testimonials.splice(i,1); renderTestimonials(); }
+
+// ---------- Team ----------
+function renderTeam(){
+  const wrap = document.getElementById('teamContainer');
+  wrap.innerHTML = '';
+  siteData.team.forEach((item, i) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    const initial = (item.name || '?').charAt(0).toUpperCase();
+    card.innerHTML = `
+      <div class="card-head"><h3>${item.name || 'New Member'}</h3><button class="btn-danger" onclick="removeTeam(${i})">Remove</button></div>
+      <div class="photo-row">
+        ${item.photo ? `<img class="avatar-preview" src="${item.photo}">` : `<div class="avatar-preview">${initial}</div>`}
+        <input type="file" accept="image/*" onchange="uploadTeamPhoto(${i}, this.files[0])">
+      </div>
+      <label>Name</label><input data-tm="${i}.name" value="${escAttr(item.name)}">
+      <label>Role</label><input data-tm="${i}.role" value="${escAttr(item.role)}">
+      <label>Skills (shown as one line)</label><input data-tm="${i}.skills" value="${escAttr(item.skills)}">
+    `;
+    wrap.appendChild(card);
+  });
+  wrap.querySelectorAll('[data-tm]').forEach(el => {
+    el.addEventListener('input', () => {
+      const [i, field] = el.dataset.tm.split('.');
+      siteData.team[i][field] = el.value;
+      if (field === 'name') renderTeam();
+    });
+  });
+}
+function addTeamMember(){ siteData.team.push({name:'New Member', role:'', skills:'', photo:''}); renderTeam(); }
+function removeTeam(i){ siteData.team.splice(i,1); renderTeam(); }
+
+async function uploadTeamPhoto(i, file){
+  if (!file) return;
+  setStatus('Uploading photo…', '');
+  const base64 = await fileToBase64(file);
+  try {
+    const headers = Object.assign({ 'Content-Type': 'application/json' }, await authHeader());
+    const res = await fetch('/.netlify/functions/upload-image', {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ filename: file.name, base64Data: base64 })
+    });
+    if (!res.ok) throw new Error(await res.text());
+    const data = await res.json();
+    siteData.team[i].photo = data.path;
+    renderTeam();
+    setStatus('Photo uploaded — click Save & Publish to make it live.', 'ok');
+  } catch (e) {
+    setStatus('Photo upload failed: ' + e.message, 'err');
+  }
+}
+function fileToBase64(file){
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+// ---------- Save ----------
+function escAttr(s){ return String(s || '').replace(/"/g, '&quot;'); }
+function setStatus(msg, cls){
+  const el = document.getElementById('saveStatus');
+  el.textContent = msg;
+  el.className = cls;
+}
+
+async function saveAll(){
+  siteData.hero.tag = document.getElementById('hero_tag').value;
+  siteData.hero.title_prefix = document.getElementById('hero_title_prefix').value;
+  siteData.hero.title_emphasis = document.getElementById('hero_title_emphasis').value;
+  siteData.hero.sub = document.getElementById('hero_sub').value;
+  siteData.hero.desc = document.getElementById('hero_desc').value;
+
+  siteData.contact.whatsapp_display = document.getElementById('contact_whatsapp_display').value;
+  siteData.contact.whatsapp_number = document.getElementById('contact_whatsapp_number').value;
+  siteData.contact.email = document.getElementById('contact_email').value;
+  siteData.contact.instagram_handle = document.getElementById('contact_instagram_handle').value;
+  siteData.contact.instagram_url = document.getElementById('contact_instagram_url').value;
+  siteData.contact.location = document.getElementById('contact_location').value;
+
+  setStatus('Saving…', '');
+  try {
+    const headers = Object.assign({ 'Content-Type': 'application/json' }, await authHeader());
+    const res = await fetch('/.netlify/functions/save-content', {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(siteData)
+    });
+    if (!res.ok) throw new Error(await res.text());
+    setStatus('Saved ✓ — live in about a minute as Netlify rebuilds.', 'ok');
+  } catch (e) {
+    setStatus('Save failed: ' + e.message, 'err');
+  }
+}
+</script>
+</body>
+</html>
