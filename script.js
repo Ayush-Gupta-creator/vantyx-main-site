@@ -34,8 +34,54 @@
   const tierNames = ['Pilot', 'Growth', 'Scale'];
   const tierBtnClass = ['btn-outline', 'btn-gold', 'btn-outline'];
 
+  let waNumber = '918950809500'; // overwritten once content loads
+
   function waLink(text){
-    return 'https://wa.me/918950809500?text=' + encodeURIComponent(text);
+    return 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(text);
+  }
+
+  function renderHero(hero, contact){
+    if (!hero) return;
+    const tagEl = document.getElementById('heroTag');
+    const titleEl = document.getElementById('heroTitle');
+    const subEl = document.getElementById('heroSub');
+    const descEl = document.getElementById('heroDesc');
+    const ctaEl = document.getElementById('heroCtaPilot');
+    if (tagEl) tagEl.textContent = hero.tag;
+    if (titleEl) titleEl.innerHTML = `${hero.title_prefix}<em>${hero.title_emphasis}</em>`;
+    if (subEl) subEl.textContent = hero.sub;
+    if (descEl) descEl.textContent = hero.desc;
+    if (ctaEl) ctaEl.href = waLink("Hi VANTYX, I'd like to claim the 14-Day Zero-Risk Pilot.");
+  }
+
+  function renderTestimonials(list){
+    const grid = document.getElementById('testimonialsContainer');
+    if (!grid) return;
+    grid.innerHTML = (list || []).map(t => `
+      <div class="test-card">
+        <p>"${t.quote}"</p>
+        <div class="test-who"><strong>${t.name}</strong><br>${t.role}</div>
+      </div>
+    `).join('');
+  }
+
+  function renderTeam(list){
+    const grid = document.getElementById('teamContainer');
+    if (!grid) return;
+    grid.innerHTML = (list || []).map(m => {
+      const initial = (m.name || '?').charAt(0).toUpperCase();
+      const avatar = m.photo
+        ? `<img class="avatar" src="${m.photo}" style="object-fit:cover;">`
+        : `<div class="avatar">${initial}</div>`;
+      return `
+        <div class="team-card">
+          ${avatar}
+          <h3>${m.name}</h3>
+          <div class="team-role">${m.role}</div>
+          <div class="team-skills">${m.skills}</div>
+        </div>
+      `;
+    }).join('');
   }
 
   // Renders the pricing grid from CMS-editable data instead of a hardcoded object.
@@ -77,17 +123,19 @@
     });
   }
 
-  // Pull editable content (pricing + FAQ) from the JSON file the admin dashboard writes to.
+  // Pull all editable content from the JSON file the admin dashboard writes to.
   fetch('/content/site-content.json')
     .then(res => res.json())
     .then(data => {
+      if (data.contact && data.contact.whatsapp_number) waNumber = data.contact.whatsapp_number;
+      renderHero(data.hero, data.contact);
       renderPricing(data.pricing || {});
       renderFaq(data.faq || []);
+      renderTestimonials(data.testimonials || []);
+      renderTeam(data.team || []);
     })
     .catch(() => {
-      // If this fails (e.g. opened the HTML file directly instead of via a server), the page
-      // still works — pricing grid and FAQ will just be empty until served properly.
-      console.warn('Could not load content/site-content.json — pricing and FAQ will be empty.');
+      console.warn('Could not load content/site-content.json — dynamic sections will be empty.');
     });
 
   // Contact form — build a WhatsApp deep link from the entered fields instead of discarding them
@@ -103,7 +151,7 @@
       if (business) msg += ` from ${business}`;
       msg += `. You can reach me at ${contact}.`;
       if (need) msg += ` ${need}`;
-      window.location.href = 'https://wa.me/918950809500?text=' + encodeURIComponent(msg);
+      window.location.href = waLink(msg);
     });
   }
 
@@ -137,10 +185,8 @@
     body.scrollTop = body.scrollHeight;
   }
 
-  const waBase = 'https://wa.me/918950809500?text=';
-  function waLink(msg){ return waBase + encodeURIComponent(msg); }
+  function chatWaLink(msg){ return waLink(msg); }
 
-  // Simple keyword-matched knowledge base — answers instantly, no server needed
   const kb = [
     { keys: ['service','what do you do','offer'],
       reply: "We install a 24/7 WhatsApp Automation Engine for Dental Clinics, Hospitality (cafes/restaurants/hotels), and Real Estate — it recovers missed calls and after-hours inquiries automatically. Web Development and Short-Form Video are optional add-ons that feed leads into the engine." },
@@ -177,11 +223,11 @@
       if(reply){
         addMsg(reply, 'bot');
         if(reply.includes('WhatsApp') && reply.includes('tap below')){
-          addMsg(`<a href="${waLink('Hi VANTYX, I need help — can we chat?')}" style="color:var(--gold-bright); font-weight:600;" target="_blank">Open WhatsApp Chat →</a>`, 'bot');
+          addMsg(`<a href="${chatWaLink('Hi VANTYX, I need help — can we chat?')}" style="color:var(--gold-bright); font-weight:600;" target="_blank">Open WhatsApp Chat →</a>`, 'bot');
         }
       } else {
         addMsg(`I want to make sure you get the right answer — let's continue this on WhatsApp with our team directly.`, 'bot');
-        addMsg(`<a href="${waLink('Hi VANTYX, I have a question: ' + msg)}" style="color:var(--gold-bright); font-weight:600;" target="_blank">Open WhatsApp Chat →</a>`, 'bot');
+        addMsg(`<a href="${chatWaLink('Hi VANTYX, I have a question: ' + msg)}" style="color:var(--gold-bright); font-weight:600;" target="_blank">Open WhatsApp Chat →</a>`, 'bot');
       }
     }, 450);
   }
@@ -211,10 +257,8 @@
 
 // ============================================================
 // LIGHTWEIGHT MOTION LAYER — zero dependencies, respects prefers-reduced-motion.
-// Header scroll shadow + IntersectionObserver-based scroll reveals.
 // ============================================================
 (function(){
-  // Sticky header shadow once the page scrolls
   const headerEl = document.querySelector('header');
   if (headerEl){
     const toggleHeaderShadow = () => headerEl.classList.toggle('is-scrolled', window.scrollY > 8);
@@ -225,8 +269,6 @@
   const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduceMotion || typeof IntersectionObserver === 'undefined') return;
 
-  // Groups of elements that fade/slide up as they enter the viewport, staggered within each group.
-  // Runs on a short delay so the CMS-driven pricing/FAQ content (loaded via fetch) has time to render first.
   function initReveal(){
     const revealGroups = [
       '.service-grid .service-card',
@@ -250,7 +292,7 @@
 
     revealGroups.forEach(selector => {
       document.querySelectorAll(selector).forEach((el, i) => {
-        if (el.classList.contains('reveal')) return; // already observed
+        if (el.classList.contains('reveal')) return;
         el.classList.add('reveal');
         el.style.transitionDelay = Math.min(i * 60, 300) + 'ms';
         observer.observe(el);
@@ -259,6 +301,5 @@
   }
 
   initReveal();
-  // Re-run shortly after load to catch the pricing/FAQ cards once the content fetch resolves.
   setTimeout(initReveal, 500);
 })();
